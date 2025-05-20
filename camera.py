@@ -1,5 +1,5 @@
 import cv2
-import socket
+import socket 
 
 #esp32_ip = '192.168.37.79'  # Sostituisci con l'indirizzo IP del tuo ESP32
 #port = 12345
