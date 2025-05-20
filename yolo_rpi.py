@@ -1,81 +1,69 @@
+import pathlib
+if hasattr(pathlib, 'PosixPath'):
+    pathlib.PosixPath = pathlib.WindowsPath
+
+# Sopprime i FutureWarning di PyTorch relativi a utilizzo di cuda (non il nostro caso)
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+
 import cv2
 import numpy as np
 import socket
+import torch
 
-# === Impostazioni ===
+# Carico il modello YOLOv5, con i pesi addestrati con il nostro dataset
+
+weights_path = 'runs/train/exp2_def/weights/last.pt'
+model = torch.hub.load('ultralytics/yolov5', 'custom', path=weights_path)
+
+# Imposto il modello in modalità di inferenza e disattiva i gradienti (non ci interessano in quanto non stiamo addestrando)
+model.eval()
+torch.set_grad_enabled(False)
+
+# Video stream da porta 8080 del Raspberry Pi Zero 2 W 
 url = "http://192.168.228.79:8080"
+cap = cv2.VideoCapture(url)
+
+# Utilizziamo il protocollo TCP con la libreria socket per lo scambio di messaggi su porta 5005
+# tra PC e Raspberr, TCP è migliore di UDP perchè garantisce l'integrità e l'ordine dei messaggi
 ip = "192.168.228.79"
 port = 5005
-onnx_path = "runs/train/exp/weights/last.onnx"
-
-# === Carica modello YOLOv5 ONNX ===
-net = cv2.dnn.readNetFromONNX(onnx_path)
-net.setPreferableBackend(cv2.dnn.DNN_BACKEND_DEFAULT)
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
-
-# === Connessione socket ===
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((ip, port))
 s.settimeout(0.2)
 
-# === Video stream ===
-cap = cv2.VideoCapture(url)
-flag_stop = False
 
 while True:
     ret, frame = cap.read()
+    ret, frame = cap.read()
+    frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
+
     if not ret:
         print("Stream non disponibile.")
         s.sendall(b"STOP_SERVER\n")
         break
-
-    frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    original = frame.copy()
-    h, w = frame.shape[:2]
-
-    # === Preprocessing per YOLOv5 ONNX ===
-    blob = cv2.dnn.blobFromImage(frame, 1/255.0, (640, 640), swapRB=True, crop=False)
-    net.setInput(blob)
-    outputs = net.forward()
-
-    # === Post-processing ===
-    rows = outputs.shape[1]
-    boxes = []
-    confidences = []
-    class_ids = []
-
-    for i in range(rows):
-        row = outputs[0][i]
-        conf = row[4]
-        if conf >= 0.4:
-            scores = row[5:]
-            class_id = np.argmax(scores)
-            score = scores[class_id]
-            if score > 0.4:
-                cx, cy, w_box, h_box = row[0:4]
-                x = int((cx - w_box / 2) * w / 640)
-                y = int((cy - h_box / 2) * h / 640)
-                w_box = int(w_box * w / 640)
-                h_box = int(h_box * h / 640)
-                boxes.append([x, y, w_box, h_box])
-                confidences.append(float(score))
-                class_ids.append(class_id)
-
-    indices = cv2.dnn.NMSBoxes(boxes, confidences, 0.4, 0.5)
-    indices = indices.flatten() if len(indices) > 0 else []
-
-    # === Disegna bounding box ===
-    for i in indices:
-        x, y, w_box, h_box = boxes[i]
-        color = (0, 255, 0) if class_ids[i] == 0 else (255, 0, 0)  # verde per 'person'
-        label = f"ID:{class_ids[i]} Conf:{confidences[i]:.2f}"
-        cv2.rectangle(original, (x, y), (x + w_box, y + h_box), color, 2)
-        cv2.putText(original, label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1)
     
-    cv2.imshow("YOLOv5-ONNX Stream", original)
-
+    img_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    
+    results = model(img_rgb)
+    yes = True
+    
+    for *box, conf, cls in results.xyxy[0]:
+        class_name = model.names[int(cls)]
+        yes = False    
+        print("Classe rilevata:", class_name)
+    
+    if yes == True:    
+        print("Nulla")
+    
+    
+    cv2.imshow("YOLOv5 Stream", frame)
+    
+    # Comandi per inviare segnali al Raspberry 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
+        s.sendall(b"STOP_SERVER\n")
         break
     elif key == ord('w'):
         s.sendall(b'GO\r\n')
@@ -91,7 +79,3 @@ while True:
             print("RPI→", s.recv(1024).decode().strip())
         except socket.timeout:
             print("Nessuna risposta, msg non ricevuto")
-
-cap.release()
-cv2.destroyAllWindows()
-s.close()
