@@ -2,7 +2,6 @@
 #   Il modello è stato addestrato su sistema Linux (CoLab Nvidia T4) ed utilizza formati directory Linux
 #   Il codice di inferenza gira su Windows e in questo modo è possibile unificare i percorsi
 #   senza dover modificare il codice di addestramento
-
 import pathlib
 if hasattr(pathlib, 'PosixPath'):
     pathlib.PosixPath = pathlib.WindowsPath
@@ -11,23 +10,20 @@ if hasattr(pathlib, 'PosixPath'):
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-import torch
 # Imposta il numero di thread fisici che PyTorch può utilizzare  
+import torch
 torch.set_num_threads(8)
 import os
 os.environ["OMP_NUM_THREADS"] = "8"
 os.environ["MKL_NUM_THREADS"] = "8"
 
-
 import cv2
-import numpy as np
 import socket
 import threading
 import time
 
 # Carico il modello YOLOv5, con i pesi addestrati con il nostro dataset
-
-weights_path = 'runs/train/exp2_def/weights/last.pt'
+weights_path = 'YOLOV5_Addestrato/V2/weights/last.pt'
 model = torch.hub.load('ultralytics/yolov5', 'custom', path=weights_path)
 
 # Imposto il modello in modalità di inferenza e disattiva i gradienti (non ci interessano in quanto non stiamo addestrando)
@@ -35,19 +31,18 @@ model.eval()
 torch.set_grad_enabled(False)
 
 # Video stream da porta 8080 del Raspberry Pi Zero 2 W 
-url = "http://192.168.228.79:8080"
+url = "http://192.168.14.79:8080"
 cap = cv2.VideoCapture(url)
 
 # Utilizziamo il protocollo TCP con la libreria socket per lo scambio di messaggi su porta 5005
 # tra PC e Raspberr, TCP è migliore di UDP perchè garantisce l'integrità e l'ordine dei messaggi
-ip = "192.168.228.79"
+ip = "192.168.14.79"
 port = 5005
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((ip, port))
 s.settimeout(0.2)
 
 # Variabili condivise
-
 # Flag di controllo, quando il thread principale termina verrà impostata a True
 # di conseguenza gli altri 2 thread usciranno dai propri while loop terminando 
 stop_threads = False
@@ -58,14 +53,26 @@ latest_frame = None
 # Variabile per le classi rilevate
 detections = []
 
-#
-prev_objects = None
+classes = ['Pedestrians', 'green_light', 'ped_crossing', 'red_light', 'speed_limit_20', 'speed_limit_50', 'stop']
 
+prev_objects = None
+counter_persistance = 20
+
+threshold_grandezza_segnale = 2
 # Flag per segnale di stop
-flag_stop = False
+flag_start = False
 
 # Lock per evitare conflitti di accesso alle variabili condivise
 lock = threading.Lock()
+
+flag_ripartenza = False
+
+import math
+fov_deg = 62.2
+fov_rad = math.radians(fov_deg)
+width_px = 960
+focal_length_px = (width_px * 0.5) / math.tan(fov_rad * 0.5)
+H_real = 7
 
 # Primo thread si occuperà di leggere lo stream video (frame) 
 def frame_reader():
@@ -113,12 +120,18 @@ def detection_worker():
 
         # Memorizziamo le classi rilevate
         local_detections = []
-        for *box, conf, cls in results.xyxy[0]:
-            class_name = model.names[int(cls)]
-            confidence = float(conf)
-            if confidence > 0.60:
-                local_detections.append((class_name, confidence))
-        
+        best_obj = -1
+        best_conf = 0
+        for idx, (x1, y1, x2, y2, conf, cls) in enumerate(results.xyxy[0]):
+            confidence = float(conf)  
+            if confidence > best_conf and confidence > 0.4:
+                best_obj = idx
+                best_conf = confidence
+
+        if best_obj != -1:
+            x1, y1, x2, y2, conf, cls = results.xyxy[0][best_obj]
+            local_detections.append((x1, y1, x2, y2, model.names[int(cls)], float(conf)))
+
         # Impone il lock per evitare conflitti di accesso alla variabile detections
         with lock:
             detections = local_detections
@@ -129,7 +142,6 @@ t1 = threading.Thread(target=frame_reader)
 t2 = threading.Thread(target=detection_worker)
 t1.start()
 t2.start()
-
 
 while True:
     
@@ -150,14 +162,51 @@ while True:
 
     # Se il frame è quindi stato elaborato, mostriamo a terminale le classi rilevate e lo streaming
     if frame is not None:
+        
         if current_detections:
-            actual_class, confidence = current_detections[0]
+
+            x1,y1,x2,y2, actual_class, confidence = current_detections[0]
+           
+            height_pixel = y2 - y1
+            distance_cm = (H_real * focal_length_px) / height_pixel
+            print(f"Distanza stimata frenatura: {distance_cm:.2f} cm")
+
             if actual_class != prev_objects:
+                counter_persistance = 30
                 print("Classe rilevata:", actual_class, "Confidenza:", confidence)
                 prev_objects = actual_class
+            
+            if((actual_class == 'stop' or actual_class == "Pedestrians" or actual_class == "red_light") and flag_start == True and distance_cm < 20 and distance_cm > 16):
+                s.sendall(b'Stop Rilevato\r\n')
+                try:
+                    print("RPI→", s.recv(1024).decode().strip())
+                except socket.timeout:
+                    print("Nessuna risposta, msg non ricevuto")
+            elif(actual_class == "speed_limit_20" and flag_start == True and distance_cm < 29 and distance_cm > 16):
+                s.sendall(b'Max 20\r\n')
+                try:
+                    print("RPI→", s.recv(1024).decode().strip())
+                except socket.timeout:
+                    print("Nessuna risposta, msg non ricevuto")
+            elif(actual_class == "speed_limit_50" and flag_start == True and distance_cm < 29 and distance_cm > 19):
+                s.sendall(b'Max 50\r\n')
+                try:
+                    print("RPI 2→", s.recv(1024).decode().strip())
+                except socket.timeout:
+                    print("Nessuna risposta, msg non ricevuto")
+            elif(actual_class == "green_light" and flag_start == True and distance_cm < 23 and distance_cm > 19):
+                s.sendall(b'Semaforo Verde\n')
+                try:
+                    print("RPI→", s.recv(1024).decode().strip())
+                except socket.timeout:
+                    print("Nessuna risposta, msg non ricevuto")
 
+            
+            cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+            
         else:
-            if prev_objects is not None:
+            counter_persistance -= 1
+            if prev_objects is not None and counter_persistance == 0:
                 print("Nessuna classe rilevata")
                 prev_objects = None
 
@@ -169,27 +218,24 @@ while True:
         s.sendall(b"STOP_SERVER\n")
         break
     elif key == ord('w'):
+        flag_start = True
         s.sendall(b'GO\r\n')
-        flag_stop = False
         try:
             print("RPI→", s.recv(1024).decode().strip())
         except socket.timeout:
             print("Nessuna risposta, msg non ricevuto")
     elif key == ord('s'):
         s.sendall(b'Stop Rilevato\r\n')
-        flag_stop = True
         try:
             print("RPI→", s.recv(1024).decode().strip())
         except socket.timeout:
             print("Nessuna risposta, msg non ricevuto")
-
 
 # Imposto il flag di stop per terminare i thread
 # e attende che terminino
 stop_threads = True
 t1.join()
 t2.join()
-
 cap.release()
 cv2.destroyAllWindows()
 s.close()
