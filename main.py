@@ -11,7 +11,7 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 # Imposta il numero di thread fisici che PyTorch può utilizzare  
-import torch
+import torch 
 torch.set_num_threads(8)
 import os
 os.environ["OMP_NUM_THREADS"] = "8"
@@ -21,26 +21,29 @@ import cv2
 import socket
 import threading
 import time
+import sys
 
 # Carico il modello YOLOv5, con i pesi addestrati con il nostro dataset
-weights_path = 'YOLOV5_Addestrato/V2/weights/last.pt'
+weights_path = 'YOLOV5_Addestrato/V3/weights/last.pt'
 model = torch.hub.load('ultralytics/yolov5', 'custom', path=weights_path)
 
 # Imposto il modello in modalità di inferenza e disattiva i gradienti (non ci interessano in quanto non stiamo addestrando)
 model.eval()
 torch.set_grad_enabled(False)
 
-# Video stream da porta 8080 del Raspberry Pi Zero 2 W 
-url = "http://192.168.14.79:8080"
-cap = cv2.VideoCapture(url)
+
 
 # Utilizziamo il protocollo TCP con la libreria socket per lo scambio di messaggi su porta 5005
 # tra PC e Raspberr, TCP è migliore di UDP perchè garantisce l'integrità e l'ordine dei messaggi
-ip = "192.168.14.79"
+ip = sys.argv[1]
 port = 5005
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((ip, port))
 s.settimeout(0.2)
+
+# Video stream da porta 8080 del Raspberry Pi Zero 2 W 
+url = f"http://{ip}:8080"
+cap = cv2.VideoCapture(url)
 
 # Variabili condivise
 # Flag di controllo, quando il thread principale termina verrà impostata a True
@@ -53,12 +56,11 @@ latest_frame = None
 # Variabile per le classi rilevate
 detections = []
 
-classes = ['Pedestrians', 'green_light', 'ped_crossing', 'red_light', 'speed_limit_20', 'speed_limit_50', 'stop']
+classes = ['Pedestrians', 'green_light', 'red_light', 'speed_limit_20', 'speed_limit_50', 'stop']
 
 prev_objects = None
 counter_persistance = 20
 
-threshold_grandezza_segnale = 2
 # Flag per segnale di stop
 flag_start = False
 
@@ -74,12 +76,10 @@ width_px = 960
 focal_length_px = (width_px * 0.5) / math.tan(fov_rad * 0.5)
 H_real = 7
 
-
-
+# Variabili per la correzione della traiettoria, necessarie per evitare 
+# uno spam inutile di comandi equivalenti
 correzione_precedente = "Centro"
 correzine_attuale = None
-
-
 
 # Primo thread si occuperà di leggere lo stream video (frame) 
 def frame_reader():
@@ -167,13 +167,14 @@ while True:
         # Copiamo le detections appena elaborate da detection_worker
         current_detections = detections.copy()
 
-    # Se il frame è quindi stato elaborato, mostriamo a terminale le classi rilevate e lo streaming
+    # Se il frame è quindi stato elaborato eseguiamo lane detection e invio comandi al Raspberry
     if frame is not None:
         img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # Converti in scala di grigi
         green = (0, 255, 0)
         rosso = (0, 0, 255)
 
         spessore_linea = 2
+        # Tag rosso disegnato sulla linea di corsia individuata
         spessore_tag = 10
 
 
@@ -196,9 +197,8 @@ while True:
                 dx = i-1
 
         centro_tag = (sx + dx) / 2
-        threshold_linea = 15
-
-        intensita_svolta = 0
+        
+        # Definizione dei range di correzione
         if centro_tag >= 550 and centro_tag < 1000:
             correzine_attuale = "Sinistra"
         elif centro_tag >= 1000 and centro_tag <= 1090:
@@ -208,10 +208,14 @@ while True:
         else:
             correzine_attuale = correzione_precedente  # fallback se fuori range
 
+        intensita_svolta = 0
         cv2.putText(frame, f"Direzione: {correzine_attuale}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, green, 2)
+        
+        # Controllo se il veicolo è in movimento
         if flag_start:
+            # Invia il comando di correzione solo se la direzione è cambiata
             if correzione_precedente != correzine_attuale:
-                correzione_precedente = correzine_attuale  # Aggiorna solo se è cambiata
+                correzione_precedente = correzine_attuale  
 
                 if correzine_attuale == "Sinistra":
                     intensita_svolta = abs(centro_tag - center_right)
@@ -226,25 +230,30 @@ while True:
                 elif correzine_attuale == "Centro":
                     print("Dritto")
                     s.sendall(b'GO\r\n')
+
+        # Linea analizzata da OpenCV
         cv2.line(frame, (550, 500), (1280, 500), green, spessore_linea)
         
         # Linea di riferimento, la linea di corsia si deve sovrapporre ad essa
         cv2.line(frame, (1000, 510), (1090, 510), (255,255,255), 2)
 
-
+        # Se è stato rilevato un oggetto
         if current_detections:
 
             x1,y1,x2,y2, actual_class, confidence = current_detections[0]
            
             height_pixel = y2 - y1
             distance_cm = (H_real * focal_length_px) / height_pixel
-            print(f"Distanza stimata frenatura: {distance_cm:.2f} cm")
+            cv2.putText(frame, f"Distanza: {distance_cm:.2f} cm", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+            # Controllo se la classe è cambiata rispetto alla precedente
+            # Se la classe è cambiata resetto il contatore di persistenza
             if actual_class != prev_objects:
                 counter_persistance = 30
                 print("Classe rilevata:", actual_class, "Confidenza:", confidence)
                 prev_objects = actual_class
             
+            # Se la classe è una di quelle che ci interessano e la distanza è entro i limiti di tolleranza invia i comandi
             if((actual_class == 'stop' or actual_class == "Pedestrians" or actual_class == "red_light") and flag_start == True and distance_cm < 20 and distance_cm > 16):
                 s.sendall(b'Stop Rilevato\r\n') 
                 flag_start = False
@@ -274,7 +283,9 @@ while True:
             
             cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
             cv2.putText(frame, f"{actual_class} {confidence:.2f}", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-            
+        
+        #Faccio un check per evitare falsi
+        # Se non è stata rilevata alcuna classe decremento il timer di tolleranza, altrimenti resetto il timer e segna l'effettiva assenza di classi    
         else:
             counter_persistance -= 1
             if prev_objects is not None and counter_persistance == 0:
@@ -282,7 +293,8 @@ while True:
                 prev_objects = None
 
         cv2.imshow("YOLOv5 Stream", frame)
-    # Comandi per inviare segnali al Raspberry 
+
+    # Comandi di debug per inviare segnali al Raspberry da tastiera 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         s.sendall(b"STOP_SERVER\n")
@@ -299,6 +311,24 @@ while True:
     elif key == ord('s'):
         flag_start = False
         s.sendall(b'Stop Rilevato\r\n')
+        try:
+            print("RPI→", s.recv(1024).decode().strip())
+        except socket.timeout:
+            print("Nessuna risposta, msg non ricevuto")
+    elif key == ord('a'):
+        s.sendall(b'Sinistra\r\n')
+        flag_movimento = True
+        correzione_precedente = "Sinistra"
+        correzine_attuale = "Sinistra"
+        try:
+            print("RPI→", s.recv(1024).decode().strip())
+        except socket.timeout:
+            print("Nessuna risposta, msg non ricevuto")
+    elif key == ord('d'):
+        s.sendall(b'Destra\r\n')
+        flag_movimento = True
+        correzione_precedente = "Destra"
+        correzine_attuale = "Destra"
         try:
             print("RPI→", s.recv(1024).decode().strip())
         except socket.timeout:

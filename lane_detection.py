@@ -83,7 +83,11 @@ while True:
     # Se la correzione attuale è diversa da quella precedente, invia il comando
     # e aggiorna la variabile di correzione precedente
     intensita_svolta = 0
+    cv2.putText(frame, f"Direzione: {correzine_attuale}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, green, 2)
+    
+    # Controllo se il veicolo è in movimento
     if flag_movimento:
+        # Invia il comando di correzione solo se la direzione è cambiata
         if correzione_precedente != correzine_attuale:
             correzione_precedente = correzine_attuale 
 
@@ -101,8 +105,7 @@ while True:
                 print("Dritto")
                 s.sendall(b'GO\r\n')
 
-   
-    # Disegno della linea di riferimento
+    # Linea analizzata da OpenCV
     cv2.line(frame, (550, 500), (1280, 500), green, 2)
     
     # Linea di riferimento, la linea di corsia si deve sovrapporre ad essa

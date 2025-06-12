@@ -1,3 +1,0 @@
-formula Distanza focale = (Larghezza px x distanza nota) / larghezza cm
-
-formula distanza in cm = (larghezza cm x distanza focale) / larghezza px
