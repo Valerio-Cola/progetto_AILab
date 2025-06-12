@@ -190,7 +190,7 @@ while True:
                 if i > sx and sx == 0:
                     sx = i 
                 cv2.line(frame, (i, 500), (i, 500), rosso, spessore_tag)
-                #print(f"({i}, 450)")
+            
 
             if img_gray[500, i-1] > 250 - threshold_intensità_colore and sx != 0:
                 dx = i-1
@@ -198,7 +198,7 @@ while True:
         centro_tag = (sx + dx) / 2
         threshold_linea = 15
 
-        intensita_svolta = 0  
+        intensita_svolta = 0
         if centro_tag >= 550 and centro_tag < 1000:
             correzine_attuale = "Sinistra"
         elif centro_tag >= 1000 and centro_tag <= 1090:
@@ -206,8 +206,9 @@ while True:
         elif centro_tag > 1090 and centro_tag <= 1280:
             correzine_attuale = "Destra"
         else:
-            correzine_attuale = "Centro"  # fallback se fuori range
+            correzine_attuale = correzione_precedente  # fallback se fuori range
 
+        cv2.putText(frame, f"Direzione: {correzine_attuale}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, green, 2)
         if flag_start:
             if correzione_precedente != correzine_attuale:
                 correzione_precedente = correzine_attuale  # Aggiorna solo se è cambiata
@@ -226,7 +227,9 @@ while True:
                     print("Dritto")
                     s.sendall(b'GO\r\n')
         cv2.line(frame, (550, 500), (1280, 500), green, spessore_linea)
-
+        
+        # Linea di riferimento, la linea di corsia si deve sovrapporre ad essa
+        cv2.line(frame, (1000, 510), (1090, 510), (255,255,255), 2)
 
 
         if current_detections:
@@ -270,6 +273,7 @@ while True:
 
             
             cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+            cv2.putText(frame, f"{actual_class} {confidence:.2f}", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
             
         else:
             counter_persistance -= 1
@@ -278,7 +282,6 @@ while True:
                 prev_objects = None
 
         cv2.imshow("YOLOv5 Stream", frame)
-    print(flag_start)
     # Comandi per inviare segnali al Raspberry 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
@@ -286,6 +289,8 @@ while True:
         break
     elif key == ord('w'):
         flag_start = True
+        correzine_attuale = None
+        correzione_precedente = "Centro"
         s.sendall(b'GO\r\n')
         try:
             print("RPI→", s.recv(1024).decode().strip())

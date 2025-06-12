@@ -30,7 +30,7 @@ model = torch.hub.load('ultralytics/yolov5', 'custom', path=weights_path)
 model.eval()
 torch.set_grad_enabled(False)
 
-# Video stream da porta 8080 del Raspberry Pi Zero 2 W 
+# Video stream da porta 8080 del Raspberry Pi Zero 2W 
 url = "http://192.168.14.79:8080"
 cap = cv2.VideoCapture(url)
 

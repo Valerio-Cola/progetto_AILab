@@ -1,14 +1,10 @@
-# sudo systemctl enable streamserver.service
-# systemctl is-enabled streamserver.service
-
 import cv2 
-import numpy as np
 import cv2
 import socket
 
+# Imposta l'URL dello streaming e la porta per la connessione TCP
 url = "http://192.168.14.79:8080"
 cap = cv2.VideoCapture(url)
-
 ip = "192.168.14.79"
 port = 5005
 
@@ -16,34 +12,44 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((ip, port))
 s.settimeout(0.2)
 
+# Flag per non far ripartire il veicolo se è stato inviato  il comando di stop
 flag_movimento = False
 
+# Variabili per la correzione della traiettoria, necessarie per evitare 
+# uno spam inutile di comandi equivalenti
 correzione_precedente = "Centro"
 correzine_attuale = None
 
+#print(img.shape[1], img.shape[0], img.shape[2], img.size) 
+# 960 720 3 2073600
 
 while True:
+    # Lettura del frame dalla videocamera
     ret, frame = cap.read()
     frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    # 720 1280
     if not ret:
         print("Stream non disponibile.")
         s.sendall(b"STOP_SERVER\n")
         break
     
-    img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # Converti in scala di grigi
+    # Conversione in scala di grigi
+    img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) 
+    
     green = (0, 255, 0)
     rosso = (0, 0, 255)
+    bianco = (255, 255, 255)
 
-    spessore_linea = 2
+    # Tag rosso disegnato sulla linea di corsia individuata 
     spessore_tag = 10
 
-
     center_right = 1000
-    threshold_intensità_colore = 100
 
+    # Definiamo un threshold per l'intensità del colore, poichè non può esssere bianco assoluto
+    threshold_intensità_colore = 100
+    
     sx = 0
     dx = 0
+    # Analizziamo una riga di pixel per trovare la linea di corsia e le sue coordinate
     for i in range(550, 1280):
         intensita = img_gray[500, i]
         #print(f"Intensità: {intensita}")
@@ -52,26 +58,18 @@ while True:
             if i > sx and sx == 0:
                 sx = i 
             cv2.line(frame, (i, 500), (i, 500), rosso, spessore_tag)
-            #print(f"({i}, 450)")
 
         if img_gray[500, i-1] > 250 - threshold_intensità_colore and sx != 0:
             dx = i-1
 
-#print("sx:", sx)
-#print("dx:", dx)
     centro_tag = (sx + dx) / 2
-    #print("centro_tag:", centro_tag)
-    threshold_linea = 15
 
-    intensita_svolta = 0
 
     # Range di Correzione
     #|  dx   |      c      |   sx    |
-    # 850 900 950 1000 1050 1100 1150
+    #550 900 1000 1050  1090 1150  1280
 
-    # da 120 a 25
-    # 2 range di sterzata da 120 a 25 : [120, 95], [94, 25]
-    #    
+    # Definizione dei range di correzione
     if centro_tag >= 550 and centro_tag < 1000:
         correzine_attuale = "Sinistra"
     elif centro_tag >= 1000 and centro_tag <= 1090:
@@ -79,11 +77,15 @@ while True:
     elif centro_tag > 1090 and centro_tag <= 1280:
         correzine_attuale = "Destra"
     else:
-        correzine_attuale = "Centro"  # fallback se fuori range
+        correzine_attuale = correzione_precedente
     
+
+    # Se la correzione attuale è diversa da quella precedente, invia il comando
+    # e aggiorna la variabile di correzione precedente
+    intensita_svolta = 0
     if flag_movimento:
         if correzione_precedente != correzine_attuale:
-            correzione_precedente = correzine_attuale  # Aggiorna solo se è cambiata
+            correzione_precedente = correzine_attuale 
 
             if correzine_attuale == "Sinistra":
                 intensita_svolta = abs(centro_tag - center_right)
@@ -100,27 +102,33 @@ while True:
                 s.sendall(b'GO\r\n')
 
    
+    # Disegno della linea di riferimento
+    cv2.line(frame, (550, 500), (1280, 500), green, 2)
     
-    cv2.line(frame, (550, 500), (1280, 500), green, spessore_linea)
-    cv2.line(frame, (1000, 550), (1090, 550), green, spessore_linea)
+    # Linea di riferimento, la linea di corsia si deve sovrapporre ad essa
+    cv2.line(frame, (1000, 510), (1090, 510), bianco, 2)
     
     
     cv2.imshow("YOLOv5 Stream", frame)
     
 
+    # Debug da tastiera
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         break
+    
+    # Comando per avviare il veicolo
     elif key == ord('w'):
         s.sendall(b'GO\r\n')
         flag_movimento = True
         correzione_precedente = "Centro"
         correzine_attuale = None
-
         try:
             print("RPI→", s.recv(1024).decode().strip())
         except socket.timeout:
             print("Nessuna risposta, msg non ricevuto")
+    
+    # Comando per fermare il veicolo
     elif key == ord('s'):
         s.sendall(b'Stop Rilevato\r\n')
         flag_movimento = False
@@ -128,6 +136,8 @@ while True:
             print("RPI→", s.recv(1024).decode().strip())
         except socket.timeout:
             print("Nessuna risposta, msg non ricevuto")
+    
+    # Comandi per la sterzata del veicolo
     elif key == ord('a'):
         s.sendall(b'Sinistra\r\n')
         flag_movimento = True
@@ -146,17 +156,7 @@ while True:
             print("RPI→", s.recv(1024).decode().strip())
         except socket.timeout:
             print("Nessuna risposta, msg non ricevuto")
+
 cap.release()
 cv2.destroyAllWindows()
 s.close()
-
-#print(img.shape[1], img.shape[0], img.shape[2], img.size) 
-# 960 720 3 2073600
-
-#blu = img[450, i, 0]
-#verde = img[450, i, 1]
-#rosso = img[450, i, 2]
-
-#print(f"Pixel ({i}, {450} - B: {blu}, G: {verde}, R: {rosso})")
-
-
