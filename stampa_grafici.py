@@ -6,7 +6,7 @@ df.columns = df.columns.str.strip()
 
 print(df.columns)
 
-# Lista delle metriche da plottare
+# Metriche da plottare
 metrics = [
     ('metrics/mAP_0.5', 'mAP@0.5'),
     ('metrics/mAP_0.5:0.95', 'mAP@0.5:0.95'),
@@ -17,7 +17,7 @@ metrics = [
     ('train/cls_loss', 'Training Class Loss')
 ]
 
-# Crea un grafico separato per ogni metrica
+# Disegna i grafici per ogni metrica
 for column, label in metrics:
     plt.figure(figsize=(10, 6))
     plt.plot(df[column], label=label)
@@ -27,7 +27,6 @@ for column, label in metrics:
     plt.legend()
     plt.grid()
     
-    # Salva l'immagine
     filename = f"{label.replace('/', '_').replace('@', '_').replace(':', '_')}.png"
     plt.savefig(filename, dpi=300, bbox_inches='tight')
     plt.show()

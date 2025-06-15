@@ -1,0 +1,19 @@
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is 'main.blg'
+[242] biber-MSWIN64:340> INFO - === 
+[332] Biber.pm:420> INFO - Reading 'main.bcf'
+[428] Biber.pm:994> INFO - Found 11 citekeys in bib section 0
+[439] Biber.pm:4463> INFO - Processing section 0
+[471] Biber.pm:4654> INFO - Looking for bibtex file 'sample.bib' for section 0
+[536] bibtex.pm:1713> INFO - LaTeX decoding ...
+[559] bibtex.pm:1519> INFO - Found BibTeX data source 'sample.bib'
+[571] Utils.pm:410> ERROR - Name "Joseph Redmon, Santosh Divvala, Ross Girshick, Ali Farhadi University of Washington, Allen Institute for AI, Facebook AI Research" has too many commas, skipping entry 'yolov5arch'
+[604] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
+[605] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[605] Biber.pm:4283> INFO - Sorting list 'ynt/global//global/global/global' of type 'entry' with template 'ynt' and locale 'it-IT'
+[605] Biber.pm:4289> INFO - No sort tailoring available for locale 'it-IT'
+[662] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[666] bbl.pm:779> INFO - Output to main.bbl
+[667] Biber.pm:131> WARN - Entry with key 'yolov5arch' in section '0' is cited and found but not created (likely due to sourcemap)
+[667] Biber.pm:133> INFO - WARNINGS: 1
+[667] Biber.pm:136> INFO - ERRORS: 1
