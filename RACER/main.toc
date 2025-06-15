@@ -13,6 +13,6 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Architettura}{5}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Perchè lo abbiamo scelto}{6}{subsubsection.3.2.3}%
 \contentsline {subsubsection}{\numberline {3.2.4}Training}{7}{subsubsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.5}Object Detection}{7}{subsubsection.3.2.5}%
-\contentsline {subsection}{\numberline {3.3}Lane Detection}{8}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Sviluppi futuri del progetto}{8}{section.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Object Detection}{9}{subsubsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.3}Lane Detection}{10}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Sviluppi futuri del progetto}{12}{section.4}%

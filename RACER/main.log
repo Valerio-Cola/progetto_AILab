@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.11)  12 JUN 2025 15:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.11)  15 JUN 2025 17:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -846,61 +846,119 @@ File: cf.jpg Graphic file (type jpg)
 <use cf.jpg>
 Package pdftex.def Info: cf.jpg  used on input line 185.
 (pdftex.def)             Requested size: 354.86412pt x 236.46617pt.
-<Training Box Loss.png, id=149, 617.9085pt x 394.5942pt>
-File: Training Box Loss.png Graphic file (type png)
-<use Training Box Loss.png>
-Package pdftex.def Info: Training Box Loss.png  used on input line 198.
-(pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-<Training Class Loss.png, id=150, 617.9085pt x 394.5942pt>
-File: Training Class Loss.png Graphic file (type png)
-<use Training Class Loss.png>
-Package pdftex.def Info: Training Class Loss.png  used on input line 202.
-(pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<Training Object Loss.png, id=151, 624.4128pt x 394.5942pt>
-File: Training Object Loss.png Graphic file (type png)
-<use Training Object Loss.png>
-Package pdftex.def Info: Training Object Loss.png  used on input line 210.
-(pdftex.def)             Requested size: 219.56917pt x 138.75427pt.
-<mAP_0.5.png, id=152, 611.6451pt x 394.5942pt>
-File: mAP_0.5.png Graphic file (type png)
-<use mAP_0.5.png>
-Package pdftex.def Info: mAP_0.5.png  used on input line 214.
-(pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<Precision.png, id=153, 611.6451pt x 394.5942pt>
-File: Precision.png Graphic file (type png)
-<use Precision.png>
-Package pdftex.def Info: Precision.png  used on input line 222.
-(pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<Recall.png, id=154, 611.6451pt x 394.5942pt>
-File: Recall.png Graphic file (type png)
-<use Recall.png>
-Package pdftex.def Info: Recall.png  used on input line 226.
-(pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 
 
 [6 <./architetttura_yolo.jpg> <./cf.jpg>]
+<iou.png, id=155, 1027.84pt x 783.92876pt>
+File: iou.png Graphic file (type png)
+<use iou.png>
+Package pdftex.def Info: iou.png  used on input line 232.
+(pdftex.def)             Requested size: 155.25517pt x 118.40959pt.
 
-[7 <./Training Box Loss.png> <./Training Class Loss.png> <./Training Object Los
-s.png> <./mAP_0.5.png> <./Precision.png> <./Recall.png>]
 
-[8]
-Overfull \hbox (34.36223pt too wide) in paragraph at lines 273--273
+[7 <./iou.png>]
+<Training Box Loss.png, id=162, 617.9085pt x 394.5942pt>
+File: Training Box Loss.png Graphic file (type png)
+<use Training Box Loss.png>
+Package pdftex.def Info: Training Box Loss.png  used on input line 249.
+(pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
+<Training Class Loss.png, id=163, 617.9085pt x 394.5942pt>
+File: Training Class Loss.png Graphic file (type png)
+<use Training Class Loss.png>
+Package pdftex.def Info: Training Class Loss.png  used on input line 253.
+(pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
+<Training Object Loss.png, id=164, 624.4128pt x 394.5942pt>
+File: Training Object Loss.png Graphic file (type png)
+<use Training Object Loss.png>
+Package pdftex.def Info: Training Object Loss.png  used on input line 261.
+(pdftex.def)             Requested size: 219.56917pt x 138.75427pt.
+<mAP_0.5.png, id=165, 611.6451pt x 394.5942pt>
+File: mAP_0.5.png Graphic file (type png)
+<use mAP_0.5.png>
+Package pdftex.def Info: mAP_0.5.png  used on input line 265.
+(pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
+<Precision.png, id=166, 611.6451pt x 394.5942pt>
+File: Precision.png Graphic file (type png)
+<use Precision.png>
+Package pdftex.def Info: Precision.png  used on input line 273.
+(pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
+<Recall.png, id=167, 611.6451pt x 394.5942pt>
+File: Recall.png Graphic file (type png)
+<use Recall.png>
+Package pdftex.def Info: Recall.png  used on input line 277.
+(pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[8 <./Training Box Loss.png> <./Training Class Loss.png> <./Training Object Los
+s.png> <./mAP_0.5.png>]
+<pedone.png, id=181, 771.88374pt x 414.04688pt>
+File: pedone.png Graphic file (type png)
+<use pedone.png>
+Package pdftex.def Info: pedone.png  used on input line 306.
+(pdftex.def)             Requested size: 399.21791pt x 214.14313pt.
+<stop.png, id=182, 209.28188pt x 371.88937pt>
+File: stop.png Graphic file (type png)
+<use stop.png>
+Package pdftex.def Info: stop.png  used on input line 315.
+(pdftex.def)             Requested size: 133.07489pt x 236.47057pt.
+<20.png, id=183, 210.7875pt x 358.84062pt>
+File: 20.png Graphic file (type png)
+<use 20.png>
+Package pdftex.def Info: 20.png  used on input line 322.
+(pdftex.def)             Requested size: 133.07489pt x 226.54715pt.
+<50.png, id=184, 231.36438pt x 386.44376pt>
+File: 50.png Graphic file (type png)
+<use 50.png>
+Package pdftex.def Info: 50.png  used on input line 329.
+(pdftex.def)             Requested size: 133.07489pt x 222.27419pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[9 <./Precision.png> <./Recall.png>]
+<centro.png, id=197, 517.43312pt x 316.18124pt>
+File: centro.png Graphic file (type png)
+<use centro.png>
+Package pdftex.def Info: centro.png  used on input line 358.
+(pdftex.def)             Requested size: 310.50357pt x 189.74397pt.
+<destra.png, id=198, 602.75188pt x 338.76563pt>
+File: destra.png Graphic file (type png)
+<use destra.png>
+Package pdftex.def Info: destra.png  used on input line 367.
+(pdftex.def)             Requested size: 310.50357pt x 174.51018pt.
+<sinistra.png, id=199, 494.84875pt x 308.65312pt>
+File: sinistra.png Graphic file (type png)
+<use sinistra.png>
+Package pdftex.def Info: sinistra.png  used on input line 376.
+(pdftex.def)             Requested size: 310.50357pt x 193.67068pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[10 <./pedone.png> <./stop.png> <./20.png> <./50.png>]
+
+LaTeX Warning: Text page 11 contains only floats.
+
+
+
+[11 <./centro.png> <./destra.png> <./sinistra.png>]
+
+[12]
+Overfull \hbox (34.36223pt too wide) in paragraph at lines 404--404
 \OT1/cmtt/m/n/10 mega -[] 2560 -[] r3 -[] board ? srsltid = AfmBOoqlCYHo64N17Lx
 wVv7XPuF1ZlfI -[] sFE9XTx8FvvoUylTrOLYtfg$[][]\OT1/cmr/m/n/10 . 
  []
 
 
-Overfull \hbox (30.1321pt too wide) in paragraph at lines 273--273
+Overfull \hbox (30.1321pt too wide) in paragraph at lines 404--404
 []\OT1/cmr/m/n/10 GeeksForGeeks. \OT1/cmr/m/it/10 Mul-ti-th-rea-ding Tu-to-rial
 \OT1/cmr/m/n/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : [][]$\OT1/cmtt/m/n/10 h
 ttps : / / www . geeksforgeeks . org / multithreading -[]
@@ -908,7 +966,7 @@ ttps : / / www . geeksforgeeks . org / multithreading -[]
 
 
 
-[9] (main.aux)
+[13] (main.aux)
  ***********
 LaTeX2e <2025-06-01>
 L3 programming layer <2025-05-26>
@@ -916,6 +974,9 @@ L3 programming layer <2025-05-26>
 
 
 LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 43E37C990E58D7F013C8D6463CCF866D;2595.
@@ -929,29 +990,32 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20575 strings out of 468225
- 369551 string characters out of 5432005
- 1287529 words of memory out of 5000000
- 48833 multiletter control sequences out of 15000+600000
+ 20660 strings out of 468225
+ 370915 string characters out of 5432005
+ 1288447 words of memory out of 5000000
+ 48910 multiletter control sequences out of 15000+600000
  634133 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,695b,1819s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,695b,1819s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Valerio\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tc
 rm1000.pk><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
 sfonts/cm/cmbx10.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/Valerio/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Valerio/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Valer
-io/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Us
-ers/Valerio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmti10.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmtt10.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (9 pages, 5417423 bytes).
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Valerio/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Val
+erio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:
+/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr
+12.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmr7.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr9.pfb><C:/Users/Valerio/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Valerio/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Valerio/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Valerio/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (13 pages, 9882500 bytes).
 PDF statistics:
- 269 PDF objects out of 1000 (max. 8388607)
- 53 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 325 PDF objects out of 1000 (max. 8388607)
+ 61 named destinations out of 1000 (max. 500000)
+ 229 words of extra memory for PDF output out of 10000 (max. 10000000)
 

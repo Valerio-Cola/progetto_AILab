@@ -19,6 +19,35 @@
 
 \refsection{0}
   \datalist[entry]{ynt/global//global/global/global}
+    \entry{focallenght}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=88912dd4a25e751f045e6d3564e01fa6}{%
+           family={Bourke},
+           familyi={B\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{88912dd4a25e751f045e6d3564e01fa6}
+      \strng{fullhash}{88912dd4a25e751f045e6d3564e01fa6}
+      \strng{fullhashraw}{88912dd4a25e751f045e6d3564e01fa6}
+      \strng{bibnamehash}{88912dd4a25e751f045e6d3564e01fa6}
+      \strng{authorbibnamehash}{88912dd4a25e751f045e6d3564e01fa6}
+      \strng{authornamehash}{88912dd4a25e751f045e6d3564e01fa6}
+      \strng{authorfullhash}{88912dd4a25e751f045e6d3564e01fa6}
+      \strng{authorfullhashraw}{88912dd4a25e751f045e6d3564e01fa6}
+      \field{labelalpha}{Bou}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Field of view and focal length}
+      \verb{urlraw}
+      \verb https://paulbourke.net/miscellaneous/lens/index.html
+      \endverb
+      \verb{url}
+      \verb https://paulbourke.net/miscellaneous/lens/index.html
+      \endverb
+    \endentry
     \entry{arduinomega}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=223b488d012d4d9aadf393d2d4cf1749}{%
