@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.11)  15 JUN 2025 17:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.11)  15 JUN 2025 17:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -780,7 +780,7 @@ Package biblatex Info: ... file 'main.bbl' found.
  (main.bbl)
 Package biblatex Info: Reference section=0 on input line 36.
 Package biblatex Info: Reference segment=0 on input line 36.
-<img/logo.png, id=3, 355.5684pt x 150.3216pt>
+<img/logo.png, id=67, 355.5684pt x 150.3216pt>
 File: img/logo.png Graphic file (type png)
 <use img/logo.png>
 Package pdftex.def Info: img/logo.png  used on input line 39.
@@ -789,7 +789,7 @@ Package pdftex.def Info: img/logo.png  used on input line 39.
 
 LaTeX Warning: No \author given.
 
-<img/racer.png, id=5, 492.33937pt x 374.14781pt>
+<img/racer.png, id=69, 492.33937pt x 374.14781pt>
 File: img/racer.png Graphic file (type png)
 <use img/racer.png>
 Package pdftex.def Info: img/racer.png  used on input line 62.
@@ -806,7 +806,7 @@ Package pdftex.def Info: img/racer.png  used on input line 62.
 
 
 [2]
-<img/Schema_Motori_Arduino.png, id=60, 645.3711pt x 586.1097pt>
+<img/Schema_Motori_Arduino.png, id=108, 645.3711pt x 586.1097pt>
 File: img/Schema_Motori_Arduino.png Graphic file (type png)
 <use img/Schema_Motori_Arduino.png>
 Package pdftex.def Info: img/Schema_Motori_Arduino.png  used on input line 95.
@@ -814,26 +814,18 @@ Package pdftex.def Info: img/Schema_Motori_Arduino.png  used on input line 95.
 
 
 [3 <./img/Schema_Motori_Arduino.png>]
-
-LaTeX Warning: File `uart0.png' not found on input line 118.
-
-
-! Package pdftex.def Error: File `uart0.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.118 ...egraphics[width=0.5\textwidth]{uart0.png}
-                                                  
-? 
+<img/uart0.png, id=119, 595.5048pt x 493.1223pt>
+File: img/uart0.png Graphic file (type png)
+<use img/uart0.png>
+Package pdftex.def Info: img/uart0.png  used on input line 118.
+(pdftex.def)             Requested size: 221.78923pt x 183.6563pt.
 
 
-[4]
+[4 <./img/uart0.png>]
 
 LaTeX Warning: Citation 'yolov5arch' on page 5 undefined on input line 154.
 
-<img/architetttura_yolo.jpg, id=89, 920.68968pt x 331.2375pt>
+<img/architetttura_yolo.jpg, id=138, 920.68968pt x 331.2375pt>
 File: img/architetttura_yolo.jpg Graphic file (type jpg)
 <use img/architetttura_yolo.jpg>
 Package pdftex.def Info: img/architetttura_yolo.jpg  used on input line 174.
@@ -849,7 +841,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [5]
-<img/cf.jpg, id=99, 1113.15875pt x 741.77126pt>
+<img/cf.jpg, id=148, 1113.15875pt x 741.77126pt>
 File: img/cf.jpg Graphic file (type jpg)
 <use img/cf.jpg>
 Package pdftex.def Info: img/cf.jpg  used on input line 185.
@@ -857,7 +849,7 @@ Package pdftex.def Info: img/cf.jpg  used on input line 185.
 
 
 [6 <./img/architetttura_yolo.jpg> <./img/cf.jpg>]
-<img/iou.png, id=106, 1027.84pt x 783.92876pt>
+<img/iou.png, id=155, 1027.84pt x 783.92876pt>
 File: img/iou.png Graphic file (type png)
 <use img/iou.png>
 Package pdftex.def Info: img/iou.png  used on input line 232.
@@ -865,32 +857,32 @@ Package pdftex.def Info: img/iou.png  used on input line 232.
 
 
 [7 <./img/iou.png>]
-<img/Training Box Loss.png, id=113, 617.9085pt x 394.5942pt>
+<img/Training Box Loss.png, id=162, 617.9085pt x 394.5942pt>
 File: img/Training Box Loss.png Graphic file (type png)
 <use img/Training Box Loss.png>
 Package pdftex.def Info: img/Training Box Loss.png  used on input line 253.
 (pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-<img/Training Class Loss.png, id=114, 617.9085pt x 394.5942pt>
+<img/Training Class Loss.png, id=163, 617.9085pt x 394.5942pt>
 File: img/Training Class Loss.png Graphic file (type png)
 <use img/Training Class Loss.png>
 Package pdftex.def Info: img/Training Class Loss.png  used on input line 259.
 (pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-<img/Training Object Loss.png, id=115, 624.4128pt x 394.5942pt>
+<img/Training Object Loss.png, id=164, 624.4128pt x 394.5942pt>
 File: img/Training Object Loss.png Graphic file (type png)
 <use img/Training Object Loss.png>
 Package pdftex.def Info: img/Training Object Loss.png  used on input line 269.
 (pdftex.def)             Requested size: 219.56917pt x 138.75427pt.
-<img/mAP_0.5.png, id=116, 611.6451pt x 394.5942pt>
+<img/mAP_0.5.png, id=165, 611.6451pt x 394.5942pt>
 File: img/mAP_0.5.png Graphic file (type png)
 <use img/mAP_0.5.png>
 Package pdftex.def Info: img/mAP_0.5.png  used on input line 275.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<img/Precision.png, id=117, 611.6451pt x 394.5942pt>
+<img/Precision.png, id=166, 611.6451pt x 394.5942pt>
 File: img/Precision.png Graphic file (type png)
 <use img/Precision.png>
 Package pdftex.def Info: img/Precision.png  used on input line 285.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<img/Recall.png, id=118, 611.6451pt x 394.5942pt>
+<img/Recall.png, id=167, 611.6451pt x 394.5942pt>
 File: img/Recall.png Graphic file (type png)
 <use img/Recall.png>
 Package pdftex.def Info: img/Recall.png  used on input line 291.
@@ -900,22 +892,22 @@ Package pdftex.def Info: img/Recall.png  used on input line 291.
 [8 <./img/Training Box Loss.png> <./img/Training Class Loss.png> <./img/Trainin
 g Object Loss.png> <./img/mAP_0.5.png> <./img/Precision.png> <./img/Recall.png>
 ]
-<img/pedone.png, id=133, 771.88374pt x 414.04688pt>
+<img/pedone.png, id=182, 771.88374pt x 414.04688pt>
 File: img/pedone.png Graphic file (type png)
 <use img/pedone.png>
 Package pdftex.def Info: img/pedone.png  used on input line 324.
 (pdftex.def)             Requested size: 399.21791pt x 214.14313pt.
-<img/stop.png, id=134, 209.28188pt x 371.88937pt>
+<img/stop.png, id=183, 209.28188pt x 371.88937pt>
 File: img/stop.png Graphic file (type png)
 <use img/stop.png>
 Package pdftex.def Info: img/stop.png  used on input line 333.
 (pdftex.def)             Requested size: 133.07489pt x 236.47057pt.
-<img/20.png, id=135, 210.7875pt x 358.84062pt>
+<img/20.png, id=184, 210.7875pt x 358.84062pt>
 File: img/20.png Graphic file (type png)
 <use img/20.png>
 Package pdftex.def Info: img/20.png  used on input line 340.
 (pdftex.def)             Requested size: 133.07489pt x 226.54715pt.
-<img/50.png, id=136, 231.36438pt x 386.44376pt>
+<img/50.png, id=185, 231.36438pt x 386.44376pt>
 File: img/50.png Graphic file (type png)
 <use img/50.png>
 Package pdftex.def Info: img/50.png  used on input line 347.
@@ -927,17 +919,17 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [9]
-<img/centro.png, id=146, 517.43312pt x 316.18124pt>
+<img/centro.png, id=195, 517.43312pt x 316.18124pt>
 File: img/centro.png Graphic file (type png)
 <use img/centro.png>
 Package pdftex.def Info: img/centro.png  used on input line 376.
 (pdftex.def)             Requested size: 310.50357pt x 189.74397pt.
-<img/destra.png, id=147, 602.75188pt x 338.76563pt>
+<img/destra.png, id=196, 602.75188pt x 338.76563pt>
 File: img/destra.png Graphic file (type png)
 <use img/destra.png>
 Package pdftex.def Info: img/destra.png  used on input line 385.
 (pdftex.def)             Requested size: 310.50357pt x 174.51018pt.
-<img/sinistra.png, id=148, 494.84875pt x 308.65312pt>
+<img/sinistra.png, id=197, 494.84875pt x 308.65312pt>
 File: img/sinistra.png Graphic file (type png)
 <use img/sinistra.png>
 Package pdftex.def Info: img/sinistra.png  used on input line 394.
@@ -980,17 +972,8 @@ L3 programming layer <2025-05-26>
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  43E37C990E58D7F013C8D6463CCF866D;2595.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 43E37C990E58D7F013C8D6463CCF866D;2595.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                main
@@ -1001,10 +984,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20676 strings out of 468225
- 371836 string characters out of 5432005
- 1286975 words of memory out of 5000000
- 48928 multiletter control sequences out of 15000+600000
+ 20671 strings out of 468225
+ 371679 string characters out of 5432005
+ 1289000 words of memory out of 5000000
+ 48923 multiletter control sequences out of 15000+600000
  634133 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,695b,1819s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1024,9 +1007,9 @@ type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Valerio/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Valerio/AppData/Local/
 Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Valerio/App
 Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (13 pages, 7515251 bytes).
+Output written on main.pdf (13 pages, 9882323 bytes).
 PDF statistics:
- 271 PDF objects out of 1000 (max. 8388607)
+ 322 PDF objects out of 1000 (max. 8388607)
  59 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 229 words of extra memory for PDF output out of 10000 (max. 10000000)
 

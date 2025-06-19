@@ -168,7 +168,7 @@ while True:
             # Se latest_frame è None, vuol dire che frame_reader ha inviato il segnale di terminazione
             # e quindi non possiamo continuare
             frame = None
-        
+               
         # Copiamo le detections appena elaborate da detection_worker
         current_detections = detections.copy()
 
@@ -310,23 +310,23 @@ while True:
                     print("RPI 2→", s.recv(1024).decode().strip())
                 except socket.timeout:
                     print("Nessuna risposta, msg non ricevuto")
-            elif(actual_class == "green_light" and distance_cm < 33 and distance_cm > 10):
+            elif(actual_class == "green_light" and distance_cm < 33 and distance_cm > 10):   
                 flag_start = True
-                correzine_attuale = None
+                correzine_attuale = None 
                 correzione_precedente = "Centro"
                 s.sendall(b'Semaforo Verde\r\n')
-                try:
+                try: 
                     print("RPI→", s.recv(1024).decode().strip())
-                except socket.timeout:
+                except socket.timeout:         
                     print("Nessuna risposta, msg non ricevuto")
             elif(actual_class == "red_light" and flag_start == True and distance_cm < 40 and distance_cm > 32):
-                flag_start = False
+                flag_start = False 
                 s.sendall(b'Semaforo Rosso\r\n')
                 try:
                     print("RPI→", s.recv(1024).decode().strip())
                 except socket.timeout:
                     print("Nessuna risposta, msg non ricevuto")
-
+    
             
             cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
             cv2.putText(frame, f"{actual_class} {confidence:.2f} {distance_cm:.2f} ", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
