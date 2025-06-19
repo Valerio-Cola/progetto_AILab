@@ -1,5 +1,7 @@
 # Readme ancora in fase di elaborazione riferirsi alla [risorsa](Elaborato/main.pdf)
 
+![logo](/Elaborato/img/logo.png)  
+
 # RACER  
 ## Raspberry & Arduino Car for Environmental Recognition
 
@@ -12,26 +14,28 @@ Docente: Daniele Pannone
 Col Valerio cola.2660062@studenti.uniroma1.it  
 Cerboni Federico cerboni.2006100@studenti.uniroma1.it  
 
+
+![Figura 0](/Elaborato/img/racer.png)  
 ---
 
 # Indice
 
-1 Introduzione 3  
-2 Progettazione del Veicolo 3  
-  2.1 Arduino - Il cuore 3  
-  2.2 Raspberry Pi Z2W + PiCamera V2 - Gli occhi della macchina 4  
-  2.3 Comunicazione tra i moduli 4  
-  2.4 Alimentazione 5  
-3 Sviluppo Software 5  
-  3.1 Introduzione 5  
-  3.2 YoloV5s - Il Cervello 5  
-    3.2.1 Cosa è YoloV5 5  
-    3.2.2 Architettura 5  
-    3.2.3 Perché lo abbiamo scelto 6  
-    3.2.4 Training 7  
-    3.2.5 Object Detection 9  
-  3.3 Lane Detection 10  
-4 Sviluppi futuri del progetto 12  
+1 Introduzione  
+2 Progettazione del Veicolo   
+  2.1 Arduino - Il cuore 
+  2.2 Raspberry Pi Z2W + PiCamera V2 - Gli occhi della macchina   
+  2.3 Comunicazione tra i moduli   
+  2.4 Alimentazione 
+3 Sviluppo Software   
+  3.1 Introduzione   
+  3.2 YoloV5s - Il Cervello   
+    3.2.1 Cosa è YoloV5 
+    3.2.2 Architettura   
+    3.2.3 Perché lo abbiamo scelto   
+    3.2.4 Training 
+    3.2.5 Object Detection   
+  3.3 Lane Detection 
+4 Sviluppi futuri del progetto  
 
 ---
 
@@ -53,7 +57,7 @@ A disposizione avevamo un solo **L293D** (dual H‑Bridge motor driver) per il c
 
 Il “telaio” è in resina con ruote in gomma/plastica.
 
-![Figura 1](/Elaborato/img/fig1.png)  
+![Figura 1](/Elaborato/img/Schema_Motori_Arduino.png)  
 **Figura 1: Circuito completo dei motori.**
 
 ---
@@ -76,7 +80,7 @@ Questo modulo si occuperà di:
 2. Con la libreria **Socket** invierà i comandi/messaggi utilizzando il protocollo TCP su porta 5005 al Raspberry.
 3. Una volta ricevuti, il Raspberry li inoltrerà all’Arduino tramite il collegamento **UART0** (Universal Asynchronous Receiver‑Transmitter) che permette lo scambio su porta seriale in modo asincrono. Abbiamo deciso di rendere la comunicazione unidirezionale, solo il Pi invia *Pin TX Pi → Pin Rx Arduino*.
 
-![Figura 2](/Elaborato/img/fig2.png)  
+![Figura 2](/Elaborato/img/uart0.png)  
 **Figura 2: Collegamento UART**
 
 4. **Streaming Video Raspberry**  
@@ -127,12 +131,12 @@ La rete convoluzionale di YOLO viene suddivisa in tre parti:
 - **Neck:** esegue trasformazioni sulle caratteristiche estratte dalla Backbone.
 - **Head:** si occupa delle previsioni finali. Versioni successive di YOLO sono aggiornamenti e modificazioni di questi tre moduli.
 
-![Figura 3](/Elaborato/img/fig3.png)  
+![Figura 3](/Elaborato/img/architettura_yolo.png)  
 **Figura 3: Architettura YoloV5**
 
 YOLO divide l’immagine in input in una griglia *S×S*. Se il centro di un oggetto si trova dentro una cella, quella cella si occuperà di rilevare quell’oggetto. Ogni cella prevede *B* bounding box e un punteggio di confidenza per ognuno di quei box. La confidenza quantifica la probabilità di quel box di contenere un oggetto e con quale precisione. Inoltre ad ogni cella prevede *C* probabilità di classe, ovvero che tipo di oggetto si trova dentro la cella. Queste due informazioni vengono unite per produrre le previsioni finali.
 
-![Figura 4](/Elaborato/img/fig4.png)  
+![Figura 4](/Elaborato/img/cf.jpg)  
 **Figura 4: Tiling Input**
 
 ### 3.2.3 Perché lo abbiamo scelto
@@ -160,17 +164,17 @@ Le classi sono le seguenti:
 
 ...
 
-![Figura 5](/Elaborato/img/fig5.png)  
+![Figura 5](/Elaborato/img/iou.png)  
 **Figura 5: Intersection over Union**
 
 ...
 
 <table>
-<tr><td align="center"><img src="/Elaborato/img/fig6a.png" alt="(a) Box Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/fig6b.png" alt="(b) Class Loss" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/Training Box Loss.png" alt="(a) Box Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/training Class Loss.png" alt="(b) Class Loss" width="45%"></td></tr>
 <tr><td align="center">(a) Box Loss</td><td align="center">(b) Class Loss</td></tr>
-<tr><td align="center"><img src="/Elaborato/img/fig6c.png" alt="(c) Object Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/fig6d.png" alt="(d) mAP 0.5" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/Training Object Loss.png" alt="(c) Object Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/map_0.5.png" alt="(d) mAP 0.5" width="45%"></td></tr>
 <tr><td align="center">(c) Object Loss</td><td align="center">(d) mAP 0.5</td></tr>
-<tr><td align="center"><img src="/Elaborato/img/fig6e.png" alt="(e) Precision" width="45%"></td><td align="center"><img src="/Elaborato/img/fig6f.png" alt="(f) Recall" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/Precision.png" alt="(e) Precision" width="45%"></td><td align="center"><img src="/Elaborato/img/Recall.png" alt="(f) Recall" width="45%"></td></tr>
 <tr><td align="center">(e) Precision</td><td align="center">(f) Recall</td></tr>
 </table>
 
@@ -181,9 +185,9 @@ Le classi sono le seguenti:
 ...
 
 <table>
-<tr><td align="center"><img src="/Elaborato/img/fig7a.png" alt="(a) Pedone" width="45%"></td><td align="center"><img src="/Elaborato/img/fig7b.png" alt="(b) Segnale Stop" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/pedone.png" alt="(a) Pedone" width="45%"></td><td align="center"><img src="/Elaborato/img/stop.png" alt="(b) Segnale Stop" width="45%"></td></tr>
 <tr><td align="center">(a) Pedone</td><td align="center">(b) Segnale Stop</td></tr>
-<tr><td align="center"><img src="/Elaborato/img/fig7c.png" alt="(c) Segnale 20 km/h" width="45%"></td><td align="center"><img src="/Elaborato/img/fig7d.png" alt="(d) Segnale 50 km/h" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/20.png" alt="(c) Segnale 20 km/h" width="45%"></td><td align="center"><img src="/Elaborato/img/50.png" alt="(d) Segnale 50 km/h" width="45%"></td></tr>
 <tr><td align="center">(c) Segnale 20 km/h</td><td align="center">(d) Segnale 50 km/h</td></tr>
 </table>
 
@@ -196,9 +200,9 @@ Le classi sono le seguenti:
 ...
 
 <table>
-<tr><td align="center"><img src="/Elaborato/img/fig8a.png" alt="(a) Veicolo Centrato" width="45%"></td><td align="center"><img src="/Elaborato/img/fig8b.png" alt="(b) Svolta a Destra" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/centro.png" alt="(a) Veicolo Centrato" width="45%"></td><td align="center"><img src="/Elaborato/img/destra.png" alt="(b) Svolta a Destra" width="45%"></td></tr>
 <tr><td align="center">(a) Veicolo Centrato, prosegue dritto.</td><td align="center">(b) Svolta a Destra</td></tr>
-<tr><td align="center"><img src="/Elaborato/img/fig8c.png" alt="(c) Svolta a Sinistra" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/sinistra.png" alt="(c) Svolta a Sinistra" width="45%"></td></tr>
 <tr><td align="center">(c) Svolta a Sinistra</td></tr>
 </table>
 
@@ -225,6 +229,6 @@ Le classi sono le seguenti:
 [Kun] Rohit Kundu. *YOLO: Algorithm for Object Detection Explained [+Examples].* <https://www.v7labs.com/blog/yolo-object-detection>  
 [Rasa] Raspberry. *Raspberry Pi Camera V2.* <https://www.raspberrypi.com/products/camera-module-v2/>  
 [Rasb] Raspberry. *Raspberry Pi Zero 2W.* <https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/>  
-[Ros] Adrian Rosebrock. *Find distance from camera to object/marker using Python and OpenCV.* <https://pyimagesearch.com/2015/01/19/find-distance-camera-objectmarker-using-python-opencv>  
+[Ros] Adrian Rosebrock. *Find distance from camera to object/marker using Python and OpenCV.* <https://pyimagesearch.com/2015/01/19/find-distance-camera-objectmarker-using-python-opencv>   
 [Ulta] Ultralytics. *YoloV5.* <https://github.com/ultralytics/yolov5>  
 [Ultb] Ultralytics. *YoloV5 Tutorials.* <https://docs.ultralytics.com/yolov5/tutorials/architecture_description/>
