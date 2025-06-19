@@ -11,7 +11,7 @@ Docente: Daniele Pannone
 
 15 giugno 2025  
 
-Col Valerio cola.2660062@studenti.uniroma1.it  
+Cola Valerio cola.2660062@studenti.uniroma1.it  
 Cerboni Federico cerboni.2006100@studenti.uniroma1.it  
 
 
