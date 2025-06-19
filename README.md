@@ -170,9 +170,9 @@ Le classi sono le seguenti:
 ...
 
 <table>
-<tr><td align="center"><img src="/Elaborato/img/Training Box Loss.png" alt="(a) Box Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/training Class Loss.png" alt="(b) Class Loss" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/Training Box Loss.png" alt="(a) Box Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/Training Class Loss.png" alt="(b) Class Loss" width="45%"></td></tr>
 <tr><td align="center">(a) Box Loss</td><td align="center">(b) Class Loss</td></tr>
-<tr><td align="center"><img src="/Elaborato/img/Training Object Loss.png" alt="(c) Object Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/map_0.5.png" alt="(d) mAP 0.5" width="45%"></td></tr>
+<tr><td align="center"><img src="/Elaborato/img/Training Object Loss.png" alt="(c) Object Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/mAP_0.5.png" alt="(d) mAP 0.5" width="45%"></td></tr>
 <tr><td align="center">(c) Object Loss</td><td align="center">(d) mAP 0.5</td></tr>
 <tr><td align="center"><img src="/Elaborato/img/Precision.png" alt="(e) Precision" width="45%"></td><td align="center"><img src="/Elaborato/img/Recall.png" alt="(f) Recall" width="45%"></td></tr>
 <tr><td align="center">(e) Precision</td><td align="center">(f) Recall</td></tr>
