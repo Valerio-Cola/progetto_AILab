@@ -131,7 +131,7 @@ La rete convoluzionale di YOLO viene suddivisa in tre parti:
 - **Neck:** esegue trasformazioni sulle caratteristiche estratte dalla Backbone.
 - **Head:** si occupa delle previsioni finali. Versioni successive di YOLO sono aggiornamenti e modificazioni di questi tre moduli.
 
-![Figura 3](/Elaborato/img/architettura_yolo.png)  
+![Figura 3](/Elaborato/img/architettura_yolo.jpg)  
 **Figura 3: Architettura YoloV5**
 
 YOLO divide l’immagine in input in una griglia *S×S*. Se il centro di un oggetto si trova dentro una cella, quella cella si occuperà di rilevare quell’oggetto. Ogni cella prevede *B* bounding box e un punteggio di confidenza per ognuno di quei box. La confidenza quantifica la probabilità di quel box di contenere un oggetto e con quale precisione. Inoltre ad ogni cella prevede *C* probabilità di classe, ovvero che tipo di oggetto si trova dentro la cella. Queste due informazioni vengono unite per produrre le previsioni finali.
@@ -162,12 +162,34 @@ Le classi sono le seguenti:
 - Dimensione batch 64  
 - Learning rate 0.01
 
-...
+Questi iperparametri sono risultati i migliori per ottenere il miglior risultato possibile pur evitando che il modello andasse in overfitting. Ciò è stato compreso andando ad effettuare diverse sessioni di trainign con configurazioni differenti.
+Abbiamo anche dovuto apportare una modifica al dataset, andando ad aggiungere più immagini con segnali di limite a 20 km/h, dopo aver notato che il modello facesse fatica a distinguerli dai segnali dei 50 km/h.
+I dati sono riferiti all'ultima istanza di allenamento del modello.
+
+Durante la fase di training viene generato un file CSV che contiene le metriche delle porformance della rete neurale nella fse di validazione per ogni epoca del training.
+Nel caso di questo modello, e in generale per i modelli di object detection, ci sono diversi valori da osservare per comprendere il comportamento e l'efficacia della rete neurale.
+Precision P: Rappresenta il numero di previsioni corrette rispetto al numero di previsioni effettuate.
+Recall R: Rappresenta il numero di previsioni effettuate dal modello rispetto al numero effettivo di previsioni corrette presenti nell'immagine.
+Mean Average Precision mAP: Quantifica la performance generale del modello in rapporto tra i valori di P e R.
+Tutti i valori sono rappresentati come numeri decimali da 0 a 1.
+
+Intersection over Union (IoU): Rispetto alla classificazione, bisogna tenere conto anche di un altra capacità dei modelli di riconoscimento oggetti: quella di riconoscere la posizione di tali oggetti e delimitarli con una bounding box.
+Per stabilire la precisione con cui il modello esegue ciò si fa ricorso alla funzione di IoU, ovvero il rapporto tra l'intersezione dell'area della bounding box predetta rispetto all'area di quella effettiva, e l'unione di queste due aree.
+Più questo rapporto è vicino ad 1, più il bounding box predetto combacia con il bounding box corretto del dataset.
+  
+
 
 ![Figura 5](/Elaborato/img/iou.png)  
 **Figura 5: Intersection over Union**
 
-...
+Nel Mean Average Precision (mAP), viene impostato un threshold in cui una previsione con valore IoU superiore ad esso viene considerata corretta, e viene fatta una media di quante previsioni corrette esistono per tutte le immagini del dataset, per tutte le classi.
+Nel nostro caso abbiamo due metriche di mAP: una con threshold impostato a 0.5, e l'altra che rappresenta una media tra i valori di Average Precision con threshold a 0.5 e a 0.95, in modo da avere una metrica più severa.
+mAP@0.5 mostra un valore del 94,2%, indicando un ottima precisione del modello. Normalmente il valore scende al 65% per mAP@0.5:0.95, e si tratta comunque di un valore alto consideranto che il metro di giudizio di una previsione corretta è più stringente.
+
+Un valore alto di P significa che la maggior parte delle previsioni del modello sono corrette, mentre un valore basso significa un numero alto di falsi positivi.
+Un alto valore di R significa che il numero di previsioni corrette effettuate dal modello corrispondono al numero effettivo di positivi del dataset, un valore basso invece indica un alto numero di falsi negativi.
+Nel nostro caso, entrambi i valori superano il 90% (P=93,1%, R=90,9%) mostrando che il modello si comporta bene nel riconoscere gli oggetti.
+
 
 <table>
 <tr><td align="center"><img src="/Elaborato/img/Training Box Loss.png" alt="(a) Box Loss" width="45%"></td><td align="center"><img src="/Elaborato/img/Training Class Loss.png" alt="(b) Class Loss" width="45%"></td></tr>
@@ -182,7 +204,27 @@ Le classi sono le seguenti:
 
 ### 3.2.5 Object Detection
 
-...
+Come descritto precedentemente il modello si occupa di individuare un elemento stradale alla volta. In particolare, per evitare confusioni con falsi positivi abbiamo deciso di salvare solo l’oggetto con maggiore confidenza. In futuro puntiamo a migliorare questo aspetto, in modo da poter salvare più oggetti contemporaneamente e prendere decisioni più complesse. Come ad esempio se il veicolo si trova davanti a un semaforo verde e un pedone, il veicolo dovrà fermarsi e dare la precedenza al pedone.
+
+Abbiamo utilizzato una formula chiamata **Triangle Similarity** per calcolare una stima della distanza tra il veicolo e l’oggetto individuato. Questa formula si basa sulla dimensione originale dell’oggetto in cm, la dimensione del bounding box in pixel e una distanza nota tra il veicolo e l’oggetto. In questo modo è possibile calcolare la distanza focale (la distanza tra il centro della lente, o l’obiettivo della fotocamera, e il punto focale, dove i raggi di luce paralleli convergono dopo essere passati attraverso la lente) e successivamente la distanza tra il veicolo e l’oggetto individuato.
+
+$$
+\text{Distanza focale} = \frac{\text{Larghezza (px)} \times \text{Distanza nota (cm)}}{\text{Larghezza reale (cm)}}
+$$
+
+$$
+\text{Distanza (cm)} = \frac{\text{Larghezza reale (cm)} \times \text{Distanza focale}}{\text{Larghezza (px)}}
+$$
+
+Grazie a questo calcolo siamo in grado di stabilire una distanza ottimale per inviare il comando. Volendo essere più precisi, conoscendo **FOV** e la larghezza del sensore in pixel abbiamo sostituito il calcolo della distanza focale con la seguente formula:
+
+$$
+\text{Distanza focale} = \frac{\text{Larghezza Sensore}}{2 \cdot \tan\left( \frac{\text{FOV in radianti}}{2} \right)}
+$$
+
+La lente della PiCamera ha un FOV (*Field of View*) di **62.2°**, non è quindi in grado di individuare oggetti a distanze molto ravvicinate. Un cartello al lato della strada già a circa 15 cm di distanza non è più nell’inquadratura. Per questo motivo è stato necessario inviare il comando preventivamente ed introdurre un *delay* in Arduino in modo da far fermare il veicolo (o cambiare la velocità) ad una distanza ottimale e realistica. È quindi stato necessario inserire nel calcolo della distanza le dimensioni dei vari elementi della strada.
+
+Infine abbiamo notato che essendo un modello molto piccolo **YoloV5s** non è estremamente preciso, molto spesso per pochi frame la classe scompare per poi essere di nuovo individuata. Per questo motivo abbiamo introdotto un *timer* di tolleranza. Ad esempio se per un numero di frame consecutivi il modello non individua nulla o individua un’altra classe, non invierà alcun comando. Allo scadere del timer, verrà presa in considerazione ogni nuovo comando.
 
 <table>
 <tr><td align="center"><img src="/Elaborato/img/pedone.png" alt="(a) Pedone" width="45%"></td><td align="center"><img src="/Elaborato/img/stop.png" alt="(b) Segnale Stop" width="45%"></td></tr>
@@ -197,7 +239,10 @@ Le classi sono le seguenti:
 
 ## 3.3 Lane Detection
 
-...
+Il controllo della direzione viene calcolato in contemporanea con l’object detection nel thread principale. Abbiamo convertito in scala di grigi il frame e tracciato una linea orizzontale. Questa riga parte dal centro e si estende a tutto il lato destro; per ogni pixel andiamo a rintracciare la striscia bianca in base all’intensità. Basandosi sulla posizione rilevata verrà stabilito se si dovrà effettuare la svolta o continuare dritto. Abbiamo impostato un range di pixel (rappresentato dalla linea bianca) che indica che il veicolo è posizionato correttamente e deve quindi procedere dritto.
+
+*Nota:* i comandi di direzione non sovrascrivono quelli dell’object detection. In questo modo, una volta ferma allo stop, l’analisi della corsia riprenderà solo se verrà dato il comando di ripartenza.
+
 
 <table>
 <tr><td align="center"><img src="/Elaborato/img/centro.png" alt="(a) Veicolo Centrato" width="45%"></td><td align="center"><img src="/Elaborato/img/destra.png" alt="(b) Svolta a Destra" width="45%"></td></tr>
