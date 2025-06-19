@@ -131,7 +131,7 @@ La rete convoluzionale di YOLO viene suddivisa in tre parti:
 - **Neck:** esegue trasformazioni sulle caratteristiche estratte dalla Backbone.
 - **Head:** si occupa delle previsioni finali. Versioni successive di YOLO sono aggiornamenti e modificazioni di questi tre moduli.
 
-![Figura 3](/Elaborato/img/architettura_yolo.jpg)  
+![Figura 3](/Elaborato/img/architetttura_yolo.jpg)  
 **Figura 3: Architettura YoloV5**
 
 YOLO divide l’immagine in input in una griglia *S×S*. Se il centro di un oggetto si trova dentro una cella, quella cella si occuperà di rilevare quell’oggetto. Ogni cella prevede *B* bounding box e un punteggio di confidenza per ognuno di quei box. La confidenza quantifica la probabilità di quel box di contenere un oggetto e con quale precisione. Inoltre ad ogni cella prevede *C* probabilità di classe, ovvero che tipo di oggetto si trova dentro la cella. Queste due informazioni vengono unite per produrre le previsioni finali.
