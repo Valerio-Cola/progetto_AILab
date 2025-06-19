@@ -20,23 +20,23 @@ Cerboni Federico cerboni.2006100@studenti.uniroma1.it
 
 # Indice
 
-1 Introduzione  
-2 Progettazione del Veicolo   
-  2.1 Arduino - Il cuore 
-  2.2 Raspberry Pi Z2W + PiCamera V2 - Gli occhi della macchina   
-  2.3 Comunicazione tra i moduli   
-  2.4 Alimentazione 
-3 Sviluppo Software   
-  3.1 Introduzione   
-  3.2 YoloV5s - Il Cervello   
-    3.2.1 Cosa è YoloV5 
-    3.2.2 Architettura   
-    3.2.3 Perché lo abbiamo scelto   
-    3.2.4 Training 
-    3.2.5 Object Detection   
-  3.3 Lane Detection 
-4 Sviluppi futuri del progetto  
-
+- [1 Introduzione](#1-introduzione)  
+- [2 Progettazione del Veicolo](#2-progettazione-del-veicolo)  
+  - [2.1 Arduino - Il cuore](#21-arduino--il-cuore)  
+  - [2.2 Raspberry Pi Z2W + PiCamera V2 - Gli occhi della macchina](#22-raspberry-pi-z2w--picamera-v2--gli-occhi-della-macchina)  
+  - [2.3 Comunicazione tra i moduli](#23-comunicazione-tra-i-moduli)  
+  - [2.4 Alimentazione](#24-alimentazione)  
+- [3 Sviluppo Software](#3-sviluppo-software)  
+  - [3.1 Introduzione](#31-introduzione)  
+  - [3.2 YoloV5s - Il Cervello](#32-yolov5s--il-cervello)  
+    - [3.2.1 Cosa è YoloV5](#321-cosa-è-yolov5)  
+    - [3.2.2 Architettura](#322-architettura)  
+    - [3.2.3 Perché lo abbiamo scelto](#323-perché-lo-abbiamo-scelto)  
+    - [3.2.4 Training](#324-training)  
+    - [3.2.5 Object Detection](#325-object-detection)  
+  - [3.3 Lane Detection](#33-lane-detection)  
+- [4 Sviluppi futuri del progetto](#4-sviluppi-futuri-del-progetto)  
+- [Riferimenti bibliografici](#riferimenti-bibliografici)
 ---
 
 # 1 Introduzione
