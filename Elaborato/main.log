@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.11)  15 JUN 2025 17:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.26)  26 JUN 2025 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **./main.tex
 (main.tex
-LaTeX2e <2025-06-01>
+LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-05-26>
 (C:\Users\Valerio\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
@@ -111,7 +111,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@floatcapt=\box54
 )
 (C:\Users\Valerio\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
-Package: amsmath 2025/05/18 v2.17x AMS math features
+Package: amsmath 2025/06/16 v2.17y AMS math features
 \@mathmargin=\skip51
 
 For additional information on amsmath, use the `?' option.
@@ -822,10 +822,7 @@ Package pdftex.def Info: img/uart0.png  used on input line 118.
 
 
 [4 <./img/uart0.png>]
-
-LaTeX Warning: Citation 'yolov5arch' on page 5 undefined on input line 154.
-
-<img/architetttura_yolo.jpg, id=138, 920.68968pt x 331.2375pt>
+<img/architetttura_yolo.jpg, id=139, 920.68968pt x 331.2375pt>
 File: img/architetttura_yolo.jpg Graphic file (type jpg)
 <use img/architetttura_yolo.jpg>
 Package pdftex.def Info: img/architetttura_yolo.jpg  used on input line 174.
@@ -841,7 +838,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [5]
-<img/cf.jpg, id=148, 1113.15875pt x 741.77126pt>
+<img/cf.jpg, id=150, 1113.15875pt x 741.77126pt>
 File: img/cf.jpg Graphic file (type jpg)
 <use img/cf.jpg>
 Package pdftex.def Info: img/cf.jpg  used on input line 185.
@@ -849,7 +846,7 @@ Package pdftex.def Info: img/cf.jpg  used on input line 185.
 
 
 [6 <./img/architetttura_yolo.jpg> <./img/cf.jpg>]
-<img/iou.png, id=155, 1027.84pt x 783.92876pt>
+<img/iou.png, id=157, 1027.84pt x 783.92876pt>
 File: img/iou.png Graphic file (type png)
 <use img/iou.png>
 Package pdftex.def Info: img/iou.png  used on input line 232.
@@ -857,137 +854,143 @@ Package pdftex.def Info: img/iou.png  used on input line 232.
 
 
 [7 <./img/iou.png>]
-<img/Training Box Loss.png, id=162, 617.9085pt x 394.5942pt>
+<img/Training Box Loss.png, id=164, 617.9085pt x 394.5942pt>
 File: img/Training Box Loss.png Graphic file (type png)
 <use img/Training Box Loss.png>
-Package pdftex.def Info: img/Training Box Loss.png  used on input line 253.
+Package pdftex.def Info: img/Training Box Loss.png  used on input line 252.
 (pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-<img/Training Class Loss.png, id=163, 617.9085pt x 394.5942pt>
+<img/Training Class Loss.png, id=165, 617.9085pt x 394.5942pt>
 File: img/Training Class Loss.png Graphic file (type png)
 <use img/Training Class Loss.png>
-Package pdftex.def Info: img/Training Class Loss.png  used on input line 259.
+Package pdftex.def Info: img/Training Class Loss.png  used on input line 258.
 (pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-<img/Training Object Loss.png, id=164, 624.4128pt x 394.5942pt>
+<img/Training Object Loss.png, id=166, 624.4128pt x 394.5942pt>
 File: img/Training Object Loss.png Graphic file (type png)
 <use img/Training Object Loss.png>
-Package pdftex.def Info: img/Training Object Loss.png  used on input line 269.
+Package pdftex.def Info: img/Training Object Loss.png  used on input line 267.
 (pdftex.def)             Requested size: 219.56917pt x 138.75427pt.
-<img/mAP_0.5.png, id=165, 611.6451pt x 394.5942pt>
+<img/mAP_0.5.png, id=167, 611.6451pt x 394.5942pt>
 File: img/mAP_0.5.png Graphic file (type png)
 <use img/mAP_0.5.png>
-Package pdftex.def Info: img/mAP_0.5.png  used on input line 275.
+Package pdftex.def Info: img/mAP_0.5.png  used on input line 273.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<img/Precision.png, id=166, 611.6451pt x 394.5942pt>
+<img/Precision.png, id=168, 611.6451pt x 394.5942pt>
 File: img/Precision.png Graphic file (type png)
 <use img/Precision.png>
-Package pdftex.def Info: img/Precision.png  used on input line 285.
+Package pdftex.def Info: img/Precision.png  used on input line 282.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<img/Recall.png, id=167, 611.6451pt x 394.5942pt>
+<img/Recall.png, id=169, 611.6451pt x 394.5942pt>
 File: img/Recall.png Graphic file (type png)
 <use img/Recall.png>
-Package pdftex.def Info: img/Recall.png  used on input line 291.
+Package pdftex.def Info: img/Recall.png  used on input line 288.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
+<img/confusion_matrix.png, id=170, 867.24pt x 650.43pt>
+File: img/confusion_matrix.png Graphic file (type png)
+<use img/confusion_matrix.png>
+Package pdftex.def Info: img/confusion_matrix.png  used on input line 299.
+(pdftex.def)             Requested size: 399.21791pt x 299.41977pt.
 
 
 [8 <./img/Training Box Loss.png> <./img/Training Class Loss.png> <./img/Trainin
 g Object Loss.png> <./img/mAP_0.5.png> <./img/Precision.png> <./img/Recall.png>
 ]
-<img/pedone.png, id=182, 771.88374pt x 414.04688pt>
+
+[9 <./img/confusion_matrix.png>]
+<img/pedone.png, id=196, 771.88374pt x 414.04688pt>
 File: img/pedone.png Graphic file (type png)
 <use img/pedone.png>
-Package pdftex.def Info: img/pedone.png  used on input line 324.
+Package pdftex.def Info: img/pedone.png  used on input line 326.
 (pdftex.def)             Requested size: 399.21791pt x 214.14313pt.
-<img/stop.png, id=183, 209.28188pt x 371.88937pt>
+<img/stop.png, id=197, 209.28188pt x 371.88937pt>
 File: img/stop.png Graphic file (type png)
 <use img/stop.png>
-Package pdftex.def Info: img/stop.png  used on input line 333.
+Package pdftex.def Info: img/stop.png  used on input line 335.
 (pdftex.def)             Requested size: 133.07489pt x 236.47057pt.
-<img/20.png, id=184, 210.7875pt x 358.84062pt>
+<img/20.png, id=198, 210.7875pt x 358.84062pt>
 File: img/20.png Graphic file (type png)
 <use img/20.png>
-Package pdftex.def Info: img/20.png  used on input line 340.
+Package pdftex.def Info: img/20.png  used on input line 342.
 (pdftex.def)             Requested size: 133.07489pt x 226.54715pt.
-<img/50.png, id=185, 231.36438pt x 386.44376pt>
+<img/50.png, id=199, 231.36438pt x 386.44376pt>
 File: img/50.png Graphic file (type png)
 <use img/50.png>
-Package pdftex.def Info: img/50.png  used on input line 347.
+Package pdftex.def Info: img/50.png  used on input line 349.
 (pdftex.def)             Requested size: 133.07489pt x 222.27419pt.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
-[9]
-<img/centro.png, id=195, 517.43312pt x 316.18124pt>
+[10 <./img/pedone.png> <./img/stop.png> <./img/20.png> <./img/50.png>]
+<img/centro.png, id=209, 517.43312pt x 316.18124pt>
 File: img/centro.png Graphic file (type png)
 <use img/centro.png>
-Package pdftex.def Info: img/centro.png  used on input line 376.
-(pdftex.def)             Requested size: 310.50357pt x 189.74397pt.
-<img/destra.png, id=196, 602.75188pt x 338.76563pt>
+Package pdftex.def Info: img/centro.png  used on input line 375.
+(pdftex.def)             Requested size: 354.86412pt x 216.84819pt.
+<img/destra.png, id=210, 602.75188pt x 338.76563pt>
 File: img/destra.png Graphic file (type png)
 <use img/destra.png>
-Package pdftex.def Info: img/destra.png  used on input line 385.
-(pdftex.def)             Requested size: 310.50357pt x 174.51018pt.
-<img/sinistra.png, id=197, 494.84875pt x 308.65312pt>
+Package pdftex.def Info: img/destra.png  used on input line 386.
+(pdftex.def)             Requested size: 354.86412pt x 199.44093pt.
+<img/sinistra.png, id=211, 494.84875pt x 308.65312pt>
 File: img/sinistra.png Graphic file (type png)
 <use img/sinistra.png>
-Package pdftex.def Info: img/sinistra.png  used on input line 394.
-(pdftex.def)             Requested size: 310.50357pt x 193.67068pt.
+Package pdftex.def Info: img/sinistra.png  used on input line 397.
+(pdftex.def)             Requested size: 354.86412pt x 221.33994pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[10 <./img/pedone.png> <./img/stop.png> <./img/20.png> <./img/50.png>]
+[11 <./img/centro.png> <./img/destra.png>]
 
-LaTeX Warning: Text page 11 contains only floats.
+[12 <./img/sinistra.png>]
+Overfull \hbox (9.5602pt too wide) in paragraph at lines 423--423
+[]\OT1/cmr/m/n/10 Paul Bour-ke. \OT1/cmr/m/it/10 Field of view and fo-cal lengt
+h\OT1/cmr/m/n/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : [][]$\OT1/cmtt/m/n/10 
+https : / / paulbourke . net / miscellaneous /
+ []
 
 
-
-[11 <./img/centro.png> <./img/destra.png> <./img/sinistra.png>]
-
-[12]
-Overfull \hbox (34.36223pt too wide) in paragraph at lines 422--422
+Overfull \hbox (47.64005pt too wide) in paragraph at lines 423--423
 \OT1/cmtt/m/n/10 mega -[] 2560 -[] r3 -[] board ? srsltid = AfmBOoqlCYHo64N17Lx
 wVv7XPuF1ZlfI -[] sFE9XTx8FvvoUylTrOLYtfg$[][]\OT1/cmr/m/n/10 . 
  []
 
 
-Overfull \hbox (30.1321pt too wide) in paragraph at lines 422--422
+Overfull \hbox (43.40991pt too wide) in paragraph at lines 423--423
 []\OT1/cmr/m/n/10 GeeksForGeeks. \OT1/cmr/m/it/10 Mul-ti-th-rea-ding Tu-to-rial
 \OT1/cmr/m/n/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : [][]$\OT1/cmtt/m/n/10 h
 ttps : / / www . geeksforgeeks . org / multithreading -[]
  []
 
 
+Overfull \hbox (0.88791pt too wide) in paragraph at lines 423--423
+[]\OT1/cmr/m/n/10 Ultralytics. \OT1/cmr/m/it/10 Yo-loV5 Tu-to-rials\OT1/cmr/m/n
+/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : [][]$\OT1/cmtt/m/n/10 https : / / d
+ocs . ultralytics . com / yolov5 / tutorials /
+ []
+
+
 
 [13] (main.aux)
  ***********
-LaTeX2e <2025-06-01>
+LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-05-26>
  ***********
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 43E37C990E58D7F013C8D6463CCF866D;2595.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20671 strings out of 468225
- 371679 string characters out of 5432005
- 1289000 words of memory out of 5000000
- 48923 multiletter control sequences out of 15000+600000
+ 20685 strings out of 468219
+ 372126 string characters out of 5431901
+ 1289455 words of memory out of 5000000
+ 48939 multiletter control sequences out of 15000+600000
  634133 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,695b,1819s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1007,9 +1010,9 @@ type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Valerio/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Valerio/AppData/Local/
 Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Valerio/App
 Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (13 pages, 9882323 bytes).
+Output written on main.pdf (13 pages, 10025650 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 500000)
- 229 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 332 PDF objects out of 1000 (max. 8388607)
+ 63 named destinations out of 1000 (max. 500000)
+ 234 words of extra memory for PDF output out of 10000 (max. 10000000)
 

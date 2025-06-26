@@ -1,5 +1,9 @@
 # Readme ancora in fase di elaborazione riferirsi alla [risorsa](Elaborato/main.pdf)
 
+# Codice Principale: [Yolo+OpenCV](obj_lane_detection.py)
+# Codice Arduino: [Arduino](controllo_motori.ino)
+# Codice Raspberry: [Raspberry](stream_server_raspberry.py)
+
 ![logo](/Elaborato/img/logo.png)  
 
 # RACER  

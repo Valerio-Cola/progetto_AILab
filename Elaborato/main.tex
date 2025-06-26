@@ -39,7 +39,7 @@ sorting=ynt
     \includegraphics[width=0.45\linewidth]{img/logo.png}
 \end{figure}
 
-\title{%
+\title{
   \textbf{RACER} \\
   \Large\textbf{Raspberry \& Arduino Car for Environmental Recognition} \\
   \vspace{1cm}
@@ -247,7 +247,6 @@ Grazie a questo, YOLO è estremamente veloce, in grado di elaborare un flusso di
   \centering
   \captionsetup[subfigure]{labelformat=parens, labelsep=space}
 
-  % --- Riga 1 ---
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
     \includegraphics[width=\linewidth]{img/Training Box Loss.png}
@@ -263,7 +262,6 @@ Grazie a questo, YOLO è estremamente veloce, in grado di elaborare un flusso di
 
   \vspace{0.6em}
 
-  % --- Riga 2 ---
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
     \includegraphics[width=\linewidth]{img/Training Object Loss.png}
@@ -279,7 +277,6 @@ Grazie a questo, YOLO è estremamente veloce, in grado di elaborare un flusso di
 
   \vspace{0.6em}
 
-  % --- Riga 3 ---
   \begin{subfigure}[b]{0.495\textwidth}
     \centering
     \includegraphics[width=\linewidth]{img/Precision.png}
@@ -297,15 +294,20 @@ Grazie a questo, YOLO è estremamente veloce, in grado di elaborare un flusso di
   \label{fig:training_metrics}
 \end{figure}
 
-\newpage
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{img/confusion_matrix.png}
+    \caption{Confusion Matrix.}
+\end{figure}
+
     \subsubsection{Object Detection}
     Come descritto precedentemente il modello si occupa di individuare un elemento stradale alla volta. In particolare per evitare confusioni con falsi positivi abbiamo deciso di salvare solo l'oggetto con maggiore confidenza. In futuro puntiamo a migliorare questo aspetto, in modo da poter salvare più oggetti contemporaneamente e prendere decisioni più complesse. Come ad esempio se il veicolo si trova davanti a un semaforo verde e un pedone, il veicolo dovrà fermarsi e dare la precedenza al pedone.
     Abbiamo utilizzato una formula chiamata \cite{distanza} Triangle Similarity per calcolare una stima della distanza tra il veicolo e l'oggetto individuato. Questa formula si basa sulla dimensione originale dell'oggetto in cm, la dimensione del bounding box in pixel e una distanza nota tra il veicolo e l'oggetto. In questo modo è possibile calcolare la distanza focale (La distanza tra il centro della lente (o l'obiettivo della fotocamera) e il punto focale, dove i raggi di luce paralleli convergono dopo essere passati attraverso la lente) e successivamente la distanza tra il veicolo e l'oggetto individuato.  
     \[
-    \text{Distanza focale} = \frac{\text{Larghezza (px)} \times \text{Distanza nota (cm)}}{\text{Larghezza reale (cm)}}
+    Distanza focale = \frac{\text{Larghezza/Altezza (px)} \times \text{Distanza nota (cm)}}{\text{Larghezza/Altezza reale (cm)}}
     \]
     \[
-    \text{Distanza (cm)} = \frac{\text{Larghezza reale (cm)} \times \text{Distanza focale}}{\text{Larghezza (px)}}
+    Distanza (cm) = \frac{\text{Larghezza/Altezza reale (cm)} \times \text{Distanza focale}}{\text{Larghezza/Altezza (px)}}
     \]
 
     Grazie a questo calcolo siamo in grado di stabilire una distanza ottimale per inviare il comando. Volendo essere più precisi conoscendo FOV e la larghezza del sensore in pixel abbiamo sostutuito il calcolo della distanza focale con la seguente formula \cite{focallenght}:
@@ -315,7 +317,7 @@ Grazie a questo, YOLO è estremamente veloce, in grado di elaborare un flusso di
 
     La lente della PiCamera ha un FOV (Field of View) di 62.2 gradi, non è quindi in grado di individuare oggetti a distanze molto ravvicinate. Un cartello al lato della strada già a circa 15 cm di distanza non è più nell'inquadratura. Per questo motivo è stato necessario inviare il comando preventivamente ed introdurre un delay in Arduino in modo da far fermare il veicolo (o cambiare la velocità) ad una distanza ottimale e realistica. 
     è quindi stato necessario inserire nel calcolo della distanza le dimensioni dei vari elementi della strada.    
-    
+
 \begin{figure}[h!]
     \centering
     \captionsetup[subfigure]{labelformat=parens,labelsep=space}
@@ -363,41 +365,40 @@ Grazie a questo, YOLO è estremamente veloce, in grado di elaborare un flusso di
 
 \subsection{Lane Detection}
 Il controllo della direzione viene calcolato in contemporanea con l'object detection nel thread principale. Abbiamo convertito in scala di grigi il frame e tracciato una linea orizzontale. Questa riga parte dal centro e si estende a tutto il lato destro, per ogni pixel andiamo a rintracciare la striscia bianca in base all'intensità. Basandosi sulla posizione rilevata verrà stabilito se si dovrà effettuare la svolta o continuare dritto. Abbiamo impostato un range di pixel (rappresentato dalla linea bianca) che indica che il veicolo è posizionato correttamente e deve quindi procedere dritto. 
-% Inserire screenshot destra sinistra e dritto
 
 \textbf{Nota:} I comandi di direzione non sovrascrivono quelli dell'object detection. In questo modo una volta ferma allo stop l'analisi della corsia riprenderà solo se verrà dato il comando di ripartenza. 
 
 \begin{figure}[h!]
     \centering
-    \captionsetup[subfigure]{labelformat=parens, labelsep=space}
-
-    \begin{subfigure}[b]{0.7\linewidth}
+    \begin{subfigure}[b]{0.8\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/centro.png}
-        \caption{Veicolo Centrato, prosegue dritto.}
         \label{fig:centro}
     \end{subfigure}
+    \label{fig:posizione-centro}
+    \caption{Veicolo Centrato, prosegue dritto.}
+\end{figure}
 
-    \vspace{0.8em} 
-
-    \begin{subfigure}[b]{0.7\linewidth}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.8\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/destra.png}
-        \caption{Svolta a Destra}
         \label{fig:destra}
     \end{subfigure}
+        \caption{Svolta a Destra}
+    \label{fig:posizione-destra}
+\end{figure}
 
-    \vspace{0.8em}
-
-    \begin{subfigure}[b]{0.7\linewidth}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.8\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/sinistra.png}
-        \caption{Svolta a Sinistra}
         \label{fig:sinistra}
     \end{subfigure}
-
-    \caption{Lane Detection}
-    \label{fig:posizioni}
+    \caption{Svolta a Sinistra}
+    \label{fig:posizione-sinistra}
 \end{figure}
 
 \newpage

@@ -1,4 +1,4 @@
-# Necessario per problemi di compatibilità tra le directory:
+#   Necessario per problemi di compatibilità tra le directory:
 #   Il modello è stato addestrato su sistema Linux (CoLab Nvidia T4) ed utilizza formati directory Linux
 #   Il codice di inferenza gira su Windows e in questo modo è possibile unificare i percorsi
 #   senza dover modificare il codice di addestramento
@@ -13,11 +13,11 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 # Imposta il numero di thread fisici che PyTorch può utilizzare  
 import torch 
 torch.set_num_threads(8)
-import os
+import os   
 os.environ["OMP_NUM_THREADS"] = "8"
 os.environ["MKL_NUM_THREADS"] = "8"
 
-import cv2
+import cv2 
 import socket
 import threading
 import time
@@ -30,8 +30,6 @@ model = torch.hub.load('ultralytics/yolov5', 'custom', path=weights_path)
 # Imposto il modello in modalità di inferenza e disattiva i gradienti (non ci interessano in quanto non stiamo addestrando)
 model.eval()
 torch.set_grad_enabled(False)
-
-
 
 # Utilizziamo il protocollo TCP con la libreria socket per lo scambio di messaggi su porta 5005
 # tra PC e Raspberr, TCP è migliore di UDP perchè garantisce l'integrità e l'ordine dei messaggi
@@ -60,21 +58,18 @@ detections = []
 
 classes = ['Pedestrians', 'green_light', 'red_light', 'speed_limit_20', 'speed_limit_50', 'stop']
 
+# Flag per decidere il comportamento del veicolo
 prev_objects = None
 counter_persistance = 20
 counter_stop = -1
 flag_pedestrian = False
-
-# Flag per segnale di stop
 flag_start = False
 
 # Lock per evitare conflitti di accesso alle variabili condivise
 lock = threading.Lock()
 
-flag_stop = False
-
 import math
-fov_deg = 50
+fov_deg = 62.2
 fov_rad = math.radians(fov_deg)
 width_px = 1280
 focal_length_px = (width_px * 0.5) / math.tan(fov_rad * 0.5)
@@ -130,7 +125,7 @@ def detection_worker():
         # Inferenza per cercare le classi
         results = model(img_rgb)
 
-        # Memorizziamo le classi rilevate
+        # Memorizziamo le classi rilevate ed estrae solo la classe con la confidenza più alta
         local_detections = []
         best_obj = -1
         best_conf = 0
@@ -182,12 +177,12 @@ while True:
         # Tag rosso disegnato sulla linea di corsia individuata
         spessore_tag = 10
 
-
         center_right = 1000
         threshold_intensità_colore = 80
 
         sx = 0
         dx = 0
+        # Eseguo la ricerca della linea di corsia 
         for i in range(550, 1280):
             intensita = img_gray[500, i]
             #print(f"Intensità: {intensita}")
@@ -197,7 +192,6 @@ while True:
                     sx = i 
                 cv2.line(frame, (i, 500), (i, 500), rosso, spessore_tag)
             
-
             if img_gray[500, i-1] > 250 - threshold_intensità_colore and sx != 0:
                 dx = i-1
 
@@ -211,7 +205,7 @@ while True:
         elif centro_tag > 1090 and centro_tag <= 1280:
             correzine_attuale = "Destra"
         else:
-            correzine_attuale = correzione_precedente  # fallback se fuori range
+            correzine_attuale = correzione_precedente 
 
         intensita_svolta = 0
         cv2.putText(frame, f"Direzione: {correzine_attuale}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, green, 2)
@@ -242,7 +236,6 @@ while True:
         # Linea di riferimento, la linea di corsia si deve sovrapporre ad essa
         cv2.line(frame, (1000, 510), (1090, 510), (255,255,255), 2)
 
-        # Se è stato rilevato un oggetto
         if counter_stop > 0:
             counter_stop -= 1
             print("Contatore stop:", counter_stop)
@@ -258,16 +251,15 @@ while True:
                 print("Nessuna risposta, msg non ricevuto")
 
 
+        # Se è stato rilevato un oggetto estraggo le informazioni
+        # e calcolo la distanza in cm
         if current_detections and counter_stop == -1:
 
-            
             x1,y1,x2,y2, actual_class, confidence = current_detections[0]
            
             height_pixel = y2 - y1
             if actual_class == "Pedestrians":
                 H_real = 7.5
-            elif actual_class == "red_light" or actual_class == "green_light":
-                H_real = 3.5
             else:
                 H_real = 5
             distance_cm = (H_real * focal_length_px) / height_pixel
@@ -275,11 +267,15 @@ while True:
             # Controllo se la classe è cambiata rispetto alla precedente
             # Se la classe è cambiata resetto il contatore di persistenza
             if actual_class != prev_objects:
-                counter_persistance = 100
+                counter_persistance = 300
                 print("Classe rilevata:", actual_class, "Confidenza:", confidence)
                 prev_objects = actual_class
             
             # Se la classe è una di quelle che ci interessano e la distanza è entro i limiti di tolleranza invia i comandi
+            # NOTA: 
+            #   Il segnale di stop avvia un timer, al fine del quale il veicolo riparte
+            #   Il veicolo in presenza di un pedone si ferma e attende che il pedone sia passato
+            #   Il semaforo rosso blocca il veicolo fino a quando non diventa verde
             if(actual_class == 'stop' and flag_start == True and distance_cm < 35 and distance_cm > 30):
                 s.sendall(b'Stop Rilevato\r\n') 
                 flag_start = False
@@ -289,7 +285,7 @@ while True:
                 except socket.timeout:
                     print("Nessuna risposta, msg non ricevuto")
 
-            elif(actual_class == "Pedestrians" and flag_start == True and distance_cm < 25 and distance_cm > 20):
+            elif(actual_class == "Pedestrians" and flag_start == True and distance_cm < 28 and distance_cm > 23):
                 s.sendall(b'Pedone Rilevato\r\n')
                 flag_pedestrian = True
                 flag_start = False
@@ -319,7 +315,7 @@ while True:
                     print("RPI→", s.recv(1024).decode().strip())
                 except socket.timeout:         
                     print("Nessuna risposta, msg non ricevuto")
-            elif(actual_class == "red_light" and flag_start == True and distance_cm < 40 and distance_cm > 32):
+            elif(actual_class == "red_light" and flag_start == True and distance_cm < 43 and distance_cm > 25):
                 flag_start = False 
                 s.sendall(b'Semaforo Rosso\r\n')
                 try:
@@ -329,9 +325,9 @@ while True:
     
             
             cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
-            cv2.putText(frame, f"{actual_class} {confidence:.2f} {distance_cm:.2f} ", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            cv2.putText(frame, f" {actual_class} {confidence:.2f} {distance_cm:.2f} ", (int(x1), int(y1) - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
         
-        #Faccio un check per evitare falsi
+        # Faccio un check per evitare falsi positivi
         # Se non è stata rilevata alcuna classe decremento il timer di tolleranza, altrimenti resetto il timer e segna l'effettiva assenza di classi    
         else:
             counter_persistance -= 1
@@ -352,7 +348,7 @@ while True:
 
                 
 
-        cv2.imshow("YOLOv5 Stream", frame)
+        cv2.imshow("Stream", frame)
 
     # Comandi di debug per inviare segnali al Raspberry da tastiera 
     key = cv2.waitKey(1) & 0xFF

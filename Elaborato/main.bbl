@@ -19,6 +19,46 @@
 
 \refsection{0}
   \datalist[entry]{ynt/global//global/global/global}
+    \entry{yolov5arch}{misc}{}{}
+      \name{author}{4}{}{%
+        {{hash=99bced2e56a5253f3fe98a5f04e6d9b2}{%
+           family={Redmon},
+           familyi={R\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+        {{hash=05ca9f19da9ecbd2def4e5514f8043c8}{%
+           family={Divvala},
+           familyi={D\bibinitperiod},
+           given={Santosh},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bd5dadbe57bedc5957c19a3154c4d424}{%
+           family={Girshick},
+           familyi={G\bibinitperiod},
+           given={Ross},
+           giveni={R\bibinitperiod}}}%
+        {{hash=396c6ddedb6f986906fc3e4994d19974}{%
+           family={Farhadi},
+           familyi={F\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e1203a0044715040adeb8c5079ee645a}
+      \strng{fullhash}{b5530443e433a4da53dbe3cf155225b4}
+      \strng{fullhashraw}{b5530443e433a4da53dbe3cf155225b4}
+      \strng{bibnamehash}{e1203a0044715040adeb8c5079ee645a}
+      \strng{authorbibnamehash}{e1203a0044715040adeb8c5079ee645a}
+      \strng{authornamehash}{e1203a0044715040adeb8c5079ee645a}
+      \strng{authorfullhash}{b5530443e433a4da53dbe3cf155225b4}
+      \strng{authorfullhashraw}{b5530443e433a4da53dbe3cf155225b4}
+      \field{labelalpha}{Red+16}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://arxiv.org/pdf/1506.02640}}
+      \field{title}{You Only Look Once: Unified, Real-Time Object Detection}
+      \field{year}{2016}
+    \endentry
     \entry{focallenght}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=88912dd4a25e751f045e6d3564e01fa6}{%
