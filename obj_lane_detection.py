@@ -15,7 +15,7 @@ import torch
 torch.set_num_threads(8)
 import os   
 os.environ["OMP_NUM_THREADS"] = "8"
-os.environ["MKL_NUM_THREADS"] = "8"
+#os.environ["MKL_NUM_THREADS"] = "8"
 
 import cv2 
 import socket
@@ -344,9 +344,6 @@ while True:
                         print("RPI→", s.recv(1024).decode().strip())
                     except socket.timeout:
                         print("Nessuna risposta, msg non ricevuto")
-
-
-                
 
         cv2.imshow("Stream", frame)
 
