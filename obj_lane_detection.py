@@ -16,7 +16,7 @@ torch.set_num_threads(8)
 import os   
 os.environ["OMP_NUM_THREADS"] = "8"
 #os.environ["MKL_NUM_THREADS"] = "8"
-
+ 
 import cv2 
 import socket
 import threading
