@@ -258,6 +258,33 @@
       \verb https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/
       \endverb
     \endentry
+    \entry{dataset}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3661997b329d5fb6b525c34c120bbb95}{%
+           family={RoboFlow},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3661997b329d5fb6b525c34c120bbb95}
+      \strng{fullhash}{3661997b329d5fb6b525c34c120bbb95}
+      \strng{fullhashraw}{3661997b329d5fb6b525c34c120bbb95}
+      \strng{bibnamehash}{3661997b329d5fb6b525c34c120bbb95}
+      \strng{authorbibnamehash}{3661997b329d5fb6b525c34c120bbb95}
+      \strng{authornamehash}{3661997b329d5fb6b525c34c120bbb95}
+      \strng{authorfullhash}{3661997b329d5fb6b525c34c120bbb95}
+      \strng{authorfullhashraw}{3661997b329d5fb6b525c34c120bbb95}
+      \field{labelalpha}{Rob}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dataset}
+      \verb{urlraw}
+      \verb https://app.roboflow.com/yolorc-rrbm0/road-object-detection-v081a/8
+      \endverb
+      \verb{url}
+      \verb https://app.roboflow.com/yolorc-rrbm0/road-object-detection-v081a/8
+      \endverb
+    \endentry
     \entry{distanza}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=ad5eaecc2721564034f710ce9a318887}{%
