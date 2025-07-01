@@ -7,7 +7,7 @@
 \usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 
 % Useful package
-\usepackage{float}
+\usepackage{float} 
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -44,7 +44,7 @@ sorting=ynt
   \vspace{0.5cm}
   \large \today\\[24pt]
     
-  \large{Cola Valerio \texttt{cola.2660062@studenti.uniroma1.it}}\\
+  \large{Cola Valerio \texttt{cola.2060062@studenti.uniroma1.it}}\\
   \large{Cerboni Federico \texttt{cerboni.2006100@studenti.uniroma1.it}} 
 }
 
@@ -71,6 +71,7 @@ sorting=ynt
 
     Un primo approccio ha portato il team ad utilizzare un ESP32-S3-N16R8 in combinazione con una camera OV5560. Purtroppo la scarsa potenza di calcolo e la qualità costruttiva ci hanno convinti a sostituirlo con un Raspberry: l’antenna Wi-Fi era troppo debole, i contatti della camera talmente sensibili da compromettere il funzionamento al minimo movimento, e il corpo macchina della OV5560 si surriscaldava rapidamente, peggiorando ulteriormente le prestazioni.
 
+    Il progetto completo è disponibile su GitHub al seguente \href{https://github.com/Valerio-Cola/RACER}{link}.
 
 \section{Progettazione del Veicolo}
 
@@ -94,7 +95,7 @@ Il "telaio" è in resina con ruote in gomma e plastica.
 
 \subsection{Raspberry Pi Z2W + PiCamera V2 - Gli occhi della macchina}
 
- Per catturare i dati ambientali abbiamo utilizzato un Raspberry Pi Z2W, dotato di processore Quad-core Cortex-A53 a 1.0 GHz a 64bit e 512MB LPDDR2 di RAM, in combinazione con una \cite{picamera} PiCamera V2 che monta un sensore Sony IMX219 da 8 Megapixel. Entrambi i componenti sono stati montati in un case apposito della Raspberry mostrato in figura e montato nella parte anteriore del veicolo.
+ Per catturare i dati ambientali abbiamo utilizzato un Raspberry Pi Z2W, dotato di processore Quad-core Cortex-A53 a 1.0 GHz a 64bit e 512MB LPDDR2 di RAM, in combinazione con una \cite{picamera} PiCamera V2 che monta un sensore Sony IMX219 da 8 Megapixel. Entrambi i componenti sono stati montati in un case apposito della Raspberry mostrato nella figura in prima pagina e montato nella parte anteriore del veicolo.
 
 Questo modulo si occuperà di:
 \begin{itemize}
@@ -116,8 +117,8 @@ Questo modulo si occuperà di:
 
 \item \cite{flaskstream} Streaming Video Raspberry
 
-    Abbiamo creato un'app WebCamera Server utilizzando il framework Flask e le librerie PiCamera2 e OpenCV per catturare i frame dalla PiCamera. L'app si occupa di inviare il flusso di frame catturato dalla camera al dispositivo connesso su porta 8080.
-    Successivamente abbiamo reso lo script in un servizio linux, in modo che venga eseguito in automatico all'accensione. Per la realizzazione dell'app ci siamo affidati alla seuente \href{https://github.com/miguelgrinberg/flask-video-streaming/tree/v1}{repository}. 
+    Abbiamo creato un'app Web Camera Server utilizzando il framework Flask e le librerie PiCamera2 e OpenCV per catturare i frame dalla PiCamera. L'app si occupa di inviare il flusso di frame catturato dalla camera al dispositivo connesso su porta 8080.
+    Successivamente abbiamo reso lo script un servizio linux, in modo che venga eseguito in automatico all'accensione. Per la realizzazione dell'app ci siamo affidati alla seuente \href{https://github.com/miguelgrinberg/flask-video-streaming/tree/v1}{repository}. 
 \end{enumerate}
 
 \newpage
@@ -136,7 +137,7 @@ Il programma di elaborazione dei frame sfrutta il \cite{multithreading} multithr
 \begin{itemize}
     \item Thread Principale: Esegue la Lane Daetection e invia i comandi relativi a direzione e ciò che Yolo ha individuato solo se il Thread1 ha acquisito il frame.
     \item Thread1: Si occupa di acquisire i frame. 
-    \item Thread2: Esegue l'inferenza di Yolo e salva le classi immagazzinate
+    \item Thread2: Esegue l'inferenza di Yolo e salva le classi rilevate.
 \end{itemize} 
 
 Di seguito è rappresentato il flusso di computazione semplificato:
@@ -352,14 +353,14 @@ Grazie a questo, YOLO è estremamente veloce, in grado di elaborare un flusso di
 
 
 
-    Infine abbiamo notato che essendo un modello molto piccolo YoloV5s non è estremamente preciso, molto spesso per pochi frame la classe scompare per poi essere di nuovo individuata. Per questo motivo abbiamo introdotto un timer di tolleranza. Ad esempio se per un numero di frame consecutivi il modello non individua nulla o individua un'altra classe, non invierà alcun comando. Allo scadere del timer, verrà presa in considerazione ogni nuovo comando.
+    Infine abbiamo notato che essendo un modello molto piccolo YoloV5s non è estremamente preciso, molto spesso per pochi frame la classe scompare per poi essere di nuovo individuata. Per questo motivo abbiamo introdotto un timer di tolleranza. Ad esempio se per un numero di frame consecutivi il modello non individua nulla o individua un'altra classe, non invierà alcun comando. Allo scadere del timer, verrà preso in considerazione ogni nuovo comando.
     
 
   
 \newpage
 
 \subsection{Lane Detection}
-Il controllo della direzione viene calcolato in contemporanea con l'object detection nel thread principale. Abbiamo convertito in scala di grigi il frame e tracciato una linea orizzontale. Questa riga parte dal centro e si estende a tutto il lato destro, per ogni pixel andiamo a rintracciare la striscia bianca in base all'intensità. Basandosi sulla posizione rilevata verrà stabilito se si dovrà effettuare la svolta o continuare dritto. Abbiamo impostato un range di pixel (rappresentato dalla linea bianca) che indica che il veicolo è posizionato correttamente e deve quindi procedere dritto. 
+Il controllo della direzione viene calcolato prima dell'object detection nel thread principale. Abbiamo convertito in scala di grigi il frame e tracciato una linea orizzontale. Questa riga parte dal centro e si estende a tutto il lato destro (le Figure 9, 10, 11 sono croppate), per ogni pixel andiamo a rintracciare la striscia bianca in base all'intensità. Basandosi sulla posizione rilevata verrà stabilito se si dovrà effettuare la svolta o continuare dritto. Abbiamo impostato un range di pixel (rappresentato dalla linea bianca) che indica che il veicolo è posizionato correttamente e deve quindi procedere dritto. 
 
 \textbf{Nota:} I comandi di direzione non sovrascrivono quelli dell'object detection. In questo modo una volta ferma allo stop l'analisi della corsia riprenderà solo se verrà dato il comando di ripartenza. 
 

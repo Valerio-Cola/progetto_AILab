@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.26)  29 JUN 2025 09:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.6.26)  1 JUL 2025 17:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -806,29 +806,29 @@ Package pdftex.def Info: img/racer.png  used on input line 57.
 
 
 [2]
-<img/Schema_Motori_Arduino.png, id=108, 645.3711pt x 586.1097pt>
+<img/Schema_Motori_Arduino.png, id=109, 645.3711pt x 586.1097pt>
 File: img/Schema_Motori_Arduino.png Graphic file (type png)
 <use img/Schema_Motori_Arduino.png>
-Package pdftex.def Info: img/Schema_Motori_Arduino.png  used on input line 90.
+Package pdftex.def Info: img/Schema_Motori_Arduino.png  used on input line 91.
 (pdftex.def)             Requested size: 288.32329pt x 261.85094pt.
 
 
 [3 <./img/Schema_Motori_Arduino.png>]
-<img/uart0.png, id=119, 595.5048pt x 493.1223pt>
+<img/uart0.png, id=120, 595.5048pt x 493.1223pt>
 File: img/uart0.png Graphic file (type png)
 <use img/uart0.png>
-Package pdftex.def Info: img/uart0.png  used on input line 113.
+Package pdftex.def Info: img/uart0.png  used on input line 114.
 (pdftex.def)             Requested size: 221.78923pt x 183.6563pt.
 
 
 [4 <./img/uart0.png>]
-<img/architetttura_yolo.jpg, id=139, 920.68968pt x 331.2375pt>
+<img/architetttura_yolo.jpg, id=140, 920.68968pt x 331.2375pt>
 File: img/architetttura_yolo.jpg Graphic file (type jpg)
 <use img/architetttura_yolo.jpg>
-Package pdftex.def Info: img/architetttura_yolo.jpg  used on input line 169.
+Package pdftex.def Info: img/architetttura_yolo.jpg  used on input line 170.
 (pdftex.def)             Requested size: 487.93903pt x 175.54997pt.
 
-Overfull \hbox (44.36055pt too wide) in paragraph at lines 169--170
+Overfull \hbox (44.36055pt too wide) in paragraph at lines 170--171
  [][] 
  []
 
@@ -838,56 +838,56 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 [5]
-<img/cf.jpg, id=150, 1113.15875pt x 741.77126pt>
+<img/cf.jpg, id=151, 1113.15875pt x 741.77126pt>
 File: img/cf.jpg Graphic file (type jpg)
 <use img/cf.jpg>
-Package pdftex.def Info: img/cf.jpg  used on input line 180.
+Package pdftex.def Info: img/cf.jpg  used on input line 181.
 (pdftex.def)             Requested size: 354.86412pt x 236.46617pt.
 
 
 [6 <./img/architetttura_yolo.jpg> <./img/cf.jpg>]
-<img/iou.png, id=158, 1027.84pt x 783.92876pt>
+<img/iou.png, id=159, 1027.84pt x 783.92876pt>
 File: img/iou.png Graphic file (type png)
 <use img/iou.png>
-Package pdftex.def Info: img/iou.png  used on input line 227.
+Package pdftex.def Info: img/iou.png  used on input line 228.
 (pdftex.def)             Requested size: 155.25517pt x 118.40959pt.
 
 
 [7 <./img/iou.png>]
-<img/Training Box Loss.png, id=166, 617.9085pt x 394.5942pt>
+<img/Training Box Loss.png, id=167, 617.9085pt x 394.5942pt>
 File: img/Training Box Loss.png Graphic file (type png)
 <use img/Training Box Loss.png>
-Package pdftex.def Info: img/Training Box Loss.png  used on input line 247.
+Package pdftex.def Info: img/Training Box Loss.png  used on input line 248.
 (pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-<img/Training Class Loss.png, id=167, 617.9085pt x 394.5942pt>
+<img/Training Class Loss.png, id=168, 617.9085pt x 394.5942pt>
 File: img/Training Class Loss.png Graphic file (type png)
 <use img/Training Class Loss.png>
-Package pdftex.def Info: img/Training Class Loss.png  used on input line 253.
+Package pdftex.def Info: img/Training Class Loss.png  used on input line 254.
 (pdftex.def)             Requested size: 219.56917pt x 140.21136pt.
-<img/Training Object Loss.png, id=168, 624.4128pt x 394.5942pt>
+<img/Training Object Loss.png, id=169, 624.4128pt x 394.5942pt>
 File: img/Training Object Loss.png Graphic file (type png)
 <use img/Training Object Loss.png>
-Package pdftex.def Info: img/Training Object Loss.png  used on input line 262.
+Package pdftex.def Info: img/Training Object Loss.png  used on input line 263.
 (pdftex.def)             Requested size: 219.56917pt x 138.75427pt.
-<img/mAP_0.5.png, id=169, 611.6451pt x 394.5942pt>
+<img/mAP_0.5.png, id=170, 611.6451pt x 394.5942pt>
 File: img/mAP_0.5.png Graphic file (type png)
 <use img/mAP_0.5.png>
-Package pdftex.def Info: img/mAP_0.5.png  used on input line 268.
+Package pdftex.def Info: img/mAP_0.5.png  used on input line 269.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<img/Precision.png, id=170, 611.6451pt x 394.5942pt>
+<img/Precision.png, id=171, 611.6451pt x 394.5942pt>
 File: img/Precision.png Graphic file (type png)
 <use img/Precision.png>
-Package pdftex.def Info: img/Precision.png  used on input line 277.
+Package pdftex.def Info: img/Precision.png  used on input line 278.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<img/Recall.png, id=171, 611.6451pt x 394.5942pt>
+<img/Recall.png, id=172, 611.6451pt x 394.5942pt>
 File: img/Recall.png Graphic file (type png)
 <use img/Recall.png>
-Package pdftex.def Info: img/Recall.png  used on input line 283.
+Package pdftex.def Info: img/Recall.png  used on input line 284.
 (pdftex.def)             Requested size: 219.56917pt x 141.65038pt.
-<img/confusion_matrix.png, id=172, 867.24pt x 650.43pt>
+<img/confusion_matrix.png, id=173, 867.24pt x 650.43pt>
 File: img/confusion_matrix.png Graphic file (type png)
 <use img/confusion_matrix.png>
-Package pdftex.def Info: img/confusion_matrix.png  used on input line 294.
+Package pdftex.def Info: img/confusion_matrix.png  used on input line 295.
 (pdftex.def)             Requested size: 399.21791pt x 299.41977pt.
 
 
@@ -896,43 +896,43 @@ g Object Loss.png> <./img/mAP_0.5.png> <./img/Precision.png> <./img/Recall.png>
 ]
 
 [9 <./img/confusion_matrix.png>]
-<img/pedone.png, id=198, 771.88374pt x 414.04688pt>
+<img/pedone.png, id=199, 771.88374pt x 414.04688pt>
 File: img/pedone.png Graphic file (type png)
 <use img/pedone.png>
-Package pdftex.def Info: img/pedone.png  used on input line 321.
+Package pdftex.def Info: img/pedone.png  used on input line 322.
 (pdftex.def)             Requested size: 399.21791pt x 214.14313pt.
-<img/stop.png, id=199, 209.28188pt x 353.82187pt>
+<img/stop.png, id=200, 209.28188pt x 353.82187pt>
 File: img/stop.png Graphic file (type png)
 <use img/stop.png>
-Package pdftex.def Info: img/stop.png  used on input line 330.
+Package pdftex.def Info: img/stop.png  used on input line 331.
 (pdftex.def)             Requested size: 133.07489pt x 224.98212pt.
-<img/20.png, id=200, 210.7875pt x 358.84062pt>
+<img/20.png, id=201, 210.7875pt x 358.84062pt>
 File: img/20.png Graphic file (type png)
 <use img/20.png>
-Package pdftex.def Info: img/20.png  used on input line 337.
+Package pdftex.def Info: img/20.png  used on input line 338.
 (pdftex.def)             Requested size: 133.07489pt x 226.54715pt.
-<img/50.png, id=201, 231.36438pt x 386.44376pt>
+<img/50.png, id=202, 231.36438pt x 386.44376pt>
 File: img/50.png Graphic file (type png)
 <use img/50.png>
-Package pdftex.def Info: img/50.png  used on input line 344.
+Package pdftex.def Info: img/50.png  used on input line 345.
 (pdftex.def)             Requested size: 133.07489pt x 222.27419pt.
 
 
 [10 <./img/pedone.png> <./img/stop.png> <./img/20.png> <./img/50.png>]
-<img/centro.png, id=211, 517.43312pt x 316.18124pt>
+<img/centro.png, id=212, 517.43312pt x 316.18124pt>
 File: img/centro.png Graphic file (type png)
 <use img/centro.png>
-Package pdftex.def Info: img/centro.png  used on input line 370.
+Package pdftex.def Info: img/centro.png  used on input line 371.
 (pdftex.def)             Requested size: 354.86412pt x 216.84819pt.
-<img/destra.png, id=212, 602.75188pt x 338.76563pt>
+<img/destra.png, id=213, 602.75188pt x 338.76563pt>
 File: img/destra.png Graphic file (type png)
 <use img/destra.png>
-Package pdftex.def Info: img/destra.png  used on input line 381.
+Package pdftex.def Info: img/destra.png  used on input line 382.
 (pdftex.def)             Requested size: 354.86412pt x 199.44093pt.
-<img/sinistra.png, id=213, 494.84875pt x 308.65312pt>
+<img/sinistra.png, id=214, 494.84875pt x 308.65312pt>
 File: img/sinistra.png Graphic file (type png)
 <use img/sinistra.png>
-Package pdftex.def Info: img/sinistra.png  used on input line 392.
+Package pdftex.def Info: img/sinistra.png  used on input line 393.
 (pdftex.def)             Requested size: 354.86412pt x 221.33994pt.
 
 
@@ -943,27 +943,27 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [11 <./img/centro.png> <./img/destra.png>]
 
 [12 <./img/sinistra.png>]
-Overfull \hbox (9.5602pt too wide) in paragraph at lines 418--418
+Overfull \hbox (9.5602pt too wide) in paragraph at lines 419--419
 []\OT1/cmr/m/n/10 Paul Bour-ke. \OT1/cmr/m/it/10 Field of view and fo-cal lengt
 h\OT1/cmr/m/n/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : [][]$\OT1/cmtt/m/n/10 
 https : / / paulbourke . net / miscellaneous /
  []
 
 
-Overfull \hbox (47.64005pt too wide) in paragraph at lines 418--418
+Overfull \hbox (47.64005pt too wide) in paragraph at lines 419--419
 \OT1/cmtt/m/n/10 mega -[] 2560 -[] r3 -[] board ? srsltid = AfmBOoqlCYHo64N17Lx
 wVv7XPuF1ZlfI -[] sFE9XTx8FvvoUylTrOLYtfg$[][]\OT1/cmr/m/n/10 . 
  []
 
 
-Overfull \hbox (43.40991pt too wide) in paragraph at lines 418--418
+Overfull \hbox (43.40991pt too wide) in paragraph at lines 419--419
 []\OT1/cmr/m/n/10 GeeksForGeeks. \OT1/cmr/m/it/10 Mul-ti-th-rea-ding Tu-to-rial
 \OT1/cmr/m/n/10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : [][]$\OT1/cmtt/m/n/10 h
 ttps : / / www . geeksforgeeks . org / multithreading -[]
  []
 
 
-Overfull \hbox (0.88791pt too wide) in paragraph at lines 418--418
+Overfull \hbox (0.88791pt too wide) in paragraph at lines 419--419
 []\OT1/cmr/m/n/10 Ultralytics. \OT1/cmr/m/it/10 Yo-loV5 Tu-to-rials\OT1/cmr/m/n
 /10 . \OT1/cmr/m/sc/10 url\OT1/cmr/m/n/10 : [][]$\OT1/cmtt/m/n/10 https : / / d
 ocs . ultralytics . com / yolov5 / tutorials /
@@ -1006,9 +1006,9 @@ type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Valerio/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Valerio/AppData/Local/
 Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Valerio/App
 Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (13 pages, 10014086 bytes).
+Output written on main.pdf (13 pages, 10014302 bytes).
 PDF statistics:
- 336 PDF objects out of 1000 (max. 8388607)
+ 337 PDF objects out of 1000 (max. 8388607)
  64 named destinations out of 1000 (max. 500000)
  234 words of extra memory for PDF output out of 10000 (max. 10000000)
 
