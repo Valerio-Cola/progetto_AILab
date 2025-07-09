@@ -4,7 +4,7 @@ from flask import Flask, Response
 # La libreria Picamera2 per interagire con la videocamera Raspberry Pi
 from picamera2 import Picamera2
 
-import cv2
+import cv2 
 
 # La libreria socket per gestire le connessioni TCP
 import socket
