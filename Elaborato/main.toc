@@ -2,8 +2,8 @@
 \babel@toc {italian}{}\relax 
 \contentsline {section}{\numberline {1}Introduzione}{3}{section.1}%
 \contentsline {section}{\numberline {2}Progettazione del Veicolo}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Arduino - Il cuore}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Raspberry Pi Z2W + PiCamera V2 - Gli occhi della macchina}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.1}Arduino - Il Cuore}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Raspberry Pi Z2W + PiCamera V2 - Gli Occhi}{4}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Comunicazione tra i moduli}{4}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Alimentazione}{5}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Sviluppo Software}{5}{section.3}%
